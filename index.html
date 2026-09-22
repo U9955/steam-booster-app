@@ -1,10 +1,11 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Steam Hour Booster - زيادة ساعات ألعاب ستيم</title>
-    <meta name="description" content="Steam Hour Booster - أداة لزيادة ساعات ألعاب ستيم بدون تحميل وبأمان تام. تطوير أحمد.">
+    <title>steam Tiger - زيادة ساعات ألعاب ستيم</title>
+    <meta name="description" content="steam Tiger - أداة لزيادة ساعات ألعاب ستيم بدون تحميل وبأمان تام. تطوير أحمد.">
+    <link rel="icon" type="image/png" href="icon.png">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,18 +14,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         :root {
-            --bg-dark: #0b0f19;
-            --bg-card: #121826;
-            --bg-card-hover: #172033;
-            --primary: #3b82f6;
-            --primary-glow: rgba(59, 130, 246, 0.4);
-            --accent: #06b6d4;
-            --telegram: #229ED9;
-            --telegram-glow: rgba(34, 158, 217, 0.4);
+            --bg-dark: #050508;
+            --bg-card: #0b0b14;
+            --bg-card-hover: #121020;
+            --primary: #a855f7;
+            --primary-glow: rgba(168, 85, 247, 0.35);
+            --accent: #c084fc;
+            --telegram: #0088cc;
+            --telegram-glow: rgba(0, 136, 204, 0.4);
             --success: #10b981;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --border: #1e293b;
+            --border: rgba(168, 85, 247, 0.15);
+            --border-accent: rgba(168, 85, 247, 0.35);
         }
 
         * {
@@ -34,15 +36,21 @@
             transition: background 0.2s, color 0.2s;
         }
 
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #050508; }
+        ::-webkit-scrollbar-thumb { background: rgba(168, 85, 247, 0.25); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(168, 85, 247, 0.55); }
+
         body {
-            background-color: var(--bg-dark);
+            background-color: #050508;
             color: var(--text-main);
             line-height: 1.6;
             overflow-x: hidden;
             font-family: 'Cairo', sans-serif;
             background-image: 
-                radial-gradient(circle at 20% 15%, rgba(59, 130, 246, 0.12) 0%, transparent 40%),
-                radial-gradient(circle at 80% 80%, rgba(6, 182, 212, 0.1) 0%, transparent 40%);
+                radial-gradient(ellipse 65% 45% at 50% 0%, rgba(126, 34, 206, 0.12), transparent 70%),
+                radial-gradient(ellipse 50% 40% at 85% 90%, rgba(147, 51, 234, 0.05), transparent 70%);
+            background-attachment: fixed;
         }
 
         body.en {
@@ -55,33 +63,76 @@
             justify-content: space-between;
             align-items: center;
             padding: 18px 8%;
-            border-bottom: 1px solid var(--border);
-            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(168, 85, 247, 0.15);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(11, 15, 25, 0.85);
+            background: rgba(5, 5, 8, 0.88);
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.6);
         }
 
+        /* Luxury App Logo */
         .logo {
             display: flex;
             align-items: center;
             gap: 12px;
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: var(--text-main);
             text-decoration: none;
+            transition: all 0.3s ease;
         }
 
-        .logo i {
-            color: var(--primary);
-            font-size: 1.6rem;
-            filter: drop-shadow(0 0 8px var(--primary-glow));
+        .logo:hover {
+            transform: translateY(-1px);
+        }
+
+        .logo-img {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            object-fit: contain;
+            border: 2px solid rgba(168, 85, 247, 0.45);
+            box-shadow: 0 0 16px rgba(168, 85, 247, 0.4);
+            background: #090710;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover .logo-img {
+            border-color: rgba(192, 132, 252, 0.8);
+            box-shadow: 0 0 24px rgba(168, 85, 247, 0.7);
+        }
+
+        .logo-text-wrap {
+            display: flex;
+            flex-direction: column;
+            text-align: right;
+        }
+
+        body.en .logo-text-wrap {
+            text-align: left;
+        }
+
+        .logo-brand {
+            font-size: 1.35rem;
+            font-weight: 900;
+            letter-spacing: -0.3px;
+            background: linear-gradient(135deg, #ffffff 40%, #e9d5ff 70%, #c084fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+
+        .logo-sub {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #a855f7;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
         }
 
         .nav-links {
             display: flex;
-            gap: 18px;
+            gap: 16px;
             align-items: center;
         }
 
@@ -94,7 +145,7 @@
         }
 
         .nav-links a:hover {
-            color: var(--primary);
+            color: #c084fc;
         }
 
         /* Language Toggle Button */
@@ -102,11 +153,11 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            background: rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.04);
             color: var(--text-main);
             border: 1px solid var(--border);
             padding: 8px 14px;
-            border-radius: 8px;
+            border-radius: 9999px;
             font-size: 0.85rem;
             font-weight: 700;
             cursor: pointer;
@@ -114,32 +165,62 @@
         }
 
         .btn-lang:hover {
-            background: rgba(59, 130, 246, 0.15);
+            background: rgba(168, 85, 247, 0.15);
             border-color: var(--primary);
-            color: var(--primary);
+            color: #c084fc;
         }
 
-        /* Telegram Button */
+        /* Professional Telegram Pill Button */
         .btn-telegram {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(34, 158, 217, 0.15);
-            color: #38bdf8;
-            border: 1px solid rgba(34, 158, 217, 0.35);
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-size: 0.9rem;
+            background: rgba(34, 158, 217, 0.08);
+            border: 1px solid rgba(56, 189, 248, 0.28);
+            padding: 7px 16px;
+            border-radius: 9999px;
+            color: #e0f2fe;
+            font-size: 0.86rem;
             font-weight: 700;
             text-decoration: none;
-            transition: 0.3s;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-telegram .tg-pulse {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #38bdf8;
+            box-shadow: 0 0 8px #38bdf8;
+            display: inline-block;
+            flex-shrink: 0;
+        }
+
+        .btn-telegram i {
+            color: #38bdf8;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease;
         }
 
         .btn-telegram:hover {
-            background: var(--telegram);
-            color: white;
-            box-shadow: 0 0 15px var(--telegram-glow);
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+            border-color: #38bdf8;
+            color: #ffffff;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.5), 0 4px 15px rgba(0, 0, 0, 0.4);
             transform: translateY(-2px);
+        }
+
+        .btn-telegram:hover i {
+            color: #ffffff;
+            transform: scale(1.15) rotate(-6deg);
+        }
+
+        .btn-telegram:hover .tg-pulse {
+            background: #ffffff;
+            box-shadow: 0 0 10px #ffffff;
         }
 
         /* Hero Section */
@@ -154,18 +235,19 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 6px 16px;
-            background: rgba(59, 130, 246, 0.1);
-            border: 1px solid rgba(59, 130, 246, 0.3);
+            padding: 6px 18px;
+            background: rgba(168, 85, 247, 0.1);
+            border: 1px solid rgba(168, 85, 247, 0.3);
             border-radius: 50px;
-            color: #60a5fa;
+            color: #d8b4fe;
             font-size: 0.85rem;
             font-weight: 700;
             margin-bottom: 24px;
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.15);
         }
 
         .badge i {
-            color: #fbbf24;
+            color: #c084fc;
         }
 
         .hero h1 {
@@ -173,13 +255,13 @@
             font-weight: 900;
             line-height: 1.25;
             margin-bottom: 35px;
-            background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+            background: linear-gradient(135deg, #ffffff 30%, #f3e8ff 70%, #d8b4fe 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .hero h1 span {
-            background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+            background: linear-gradient(135deg, #a855f7 0%, #c084fc 60%, #e9d5ff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -197,31 +279,31 @@
             display: inline-flex;
             align-items: center;
             gap: 12px;
-            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            background: linear-gradient(135deg, #7e22ce 0%, #a855f7 100%);
             color: white;
             padding: 16px 36px;
             border-radius: 12px;
             font-size: 1.15rem;
             font-weight: 800;
             text-decoration: none;
-            box-shadow: 0 10px 25px var(--primary-glow);
+            box-shadow: 0 10px 25px rgba(168, 85, 247, 0.35);
             transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .btn-download:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(59, 130, 246, 0.6);
-            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            box-shadow: 0 15px 35px rgba(168, 85, 247, 0.55);
+            background: linear-gradient(135deg, #6b21a8 0%, #9333ea 100%);
         }
 
         .btn-hero-telegram {
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            background: rgba(34, 158, 217, 0.12);
+            background: rgba(0, 136, 204, 0.12);
             color: #38bdf8;
-            border: 1px solid rgba(34, 158, 217, 0.4);
+            border: 1px solid rgba(0, 136, 204, 0.35);
             padding: 16px 26px;
             border-radius: 12px;
             font-size: 1.05rem;
@@ -254,7 +336,256 @@
 
         .btn-secondary:hover {
             background: var(--bg-card-hover);
-            border-color: var(--primary);
+            border-color: rgba(168, 85, 247, 0.45);
+            color: #ffffff;
+            box-shadow: 0 4px 18px rgba(168, 85, 247, 0.2);
+        }
+
+        /* Trophy Nav Button */
+        .btn-trophy-nav {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: rgba(245, 158, 11, 0.12);
+            color: #fbbf24;
+            border: 1px solid rgba(245, 158, 11, 0.35);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .btn-trophy-nav:hover {
+            background: #f59e0b;
+            color: #1c1917;
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* Dual Programs Showcase */
+        .tools-section {
+            padding: 20px 8% 60px;
+        }
+
+        .programs-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 26px;
+            max-width: 1040px;
+            margin: 10px auto 0;
+            text-align: right;
+        }
+
+        body.en .programs-container {
+            text-align: left;
+        }
+
+        .program-card {
+            background: linear-gradient(145deg, #0e0c18 0%, #07070d 100%);
+            border: 1px solid rgba(168, 85, 247, 0.22);
+            border-radius: 20px;
+            padding: 28px;
+            position: relative;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .program-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(168, 85, 247, 0.55);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.8), 0 0 30px rgba(168, 85, 247, 0.25);
+        }
+
+        .program-card.trophy-booster {
+            border-color: rgba(245, 158, 11, 0.3);
+            background: linear-gradient(145deg, #140f1a 0%, #090710 100%);
+        }
+
+        .program-card.trophy-booster:hover {
+            border-color: rgba(245, 158, 11, 0.65);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.8), 0 0 35px rgba(245, 158, 11, 0.28);
+        }
+
+        .program-badge {
+            align-self: flex-start;
+            padding: 5px 14px;
+            background: rgba(168, 85, 247, 0.15);
+            border: 1px solid rgba(168, 85, 247, 0.35);
+            color: #d8b4fe;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: 800;
+            margin-bottom: 18px;
+        }
+
+        .trophy-badge {
+            background: rgba(245, 158, 11, 0.15);
+            border-color: rgba(245, 158, 11, 0.4);
+            color: #fbbf24;
+        }
+
+        .program-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .program-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            object-fit: contain;
+            box-shadow: 0 0 16px rgba(168, 85, 247, 0.5);
+            flex-shrink: 0;
+            background: #0d0a17;
+        }
+
+        .program-icon.gold-glow {
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.65);
+            border: 1px solid rgba(245, 158, 11, 0.4);
+            background: #151009;
+        }
+
+        .trophy-icon-wrap {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #b45309 0%, #f59e0b 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 1.5rem;
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.5);
+            flex-shrink: 0;
+        }
+
+        .program-header h3 {
+            font-size: 1.35rem;
+            font-weight: 800;
+            margin-bottom: 4px;
+            color: #ffffff;
+        }
+
+        .program-header p {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        .program-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 24px 0;
+        }
+
+        .program-features li {
+            font-size: 0.92rem;
+            color: #cbd5e1;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .program-features li i {
+            color: #10b981;
+            font-size: 0.95rem;
+        }
+
+        .btn-trophy {
+            background: linear-gradient(135deg, #b45309 0%, #f59e0b 100%) !important;
+            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.35) !important;
+        }
+
+        .btn-trophy:hover {
+            background: linear-gradient(135deg, #d97706 0%, #fbbf24 100%) !important;
+            box-shadow: 0 15px 35px rgba(245, 158, 11, 0.55) !important;
+        }
+
+        .program-meta {
+            margin-top: 14px;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        /* Trophy Modal Window */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(5, 5, 8, 0.88);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-box {
+            background: linear-gradient(145deg, #120e1a 0%, #080710 100%);
+            border: 1px solid rgba(245, 158, 11, 0.35);
+            border-radius: 22px;
+            max-width: 520px;
+            width: 100%;
+            padding: 28px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 35px rgba(245, 158, 11, 0.25);
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            text-align: right;
+        }
+
+        body.en .modal-box {
+            text-align: left;
+        }
+
+        .modal-overlay.active .modal-box {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .modal-close-btn {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #94a3b8;
+            font-size: 1.4rem;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .modal-close-btn:hover {
+            background: rgba(239, 68, 68, 0.85);
+            color: #fff;
         }
 
         .file-meta {
@@ -321,8 +652,8 @@
 
         .gallery-card:hover {
             transform: translateY(-6px);
-            border-color: var(--primary);
-            box-shadow: 0 14px 35px rgba(59, 130, 246, 0.25);
+            border-color: rgba(168, 85, 247, 0.5);
+            box-shadow: 0 14px 35px rgba(0, 0, 0, 0.7), 0 0 25px rgba(168, 85, 247, 0.2);
         }
 
         .gallery-img-wrap {
@@ -347,7 +678,7 @@
         .gallery-overlay {
             position: absolute;
             inset: 0;
-            background: rgba(11, 15, 25, 0.65);
+            background: rgba(5, 5, 8, 0.7);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -357,7 +688,7 @@
             font-weight: 700;
             opacity: 0;
             transition: opacity 0.3s;
-            backdrop-filter: blur(3px);
+            backdrop-filter: blur(4px);
         }
 
         .gallery-card:hover .gallery-overlay {
@@ -385,8 +716,8 @@
         .lightbox-modal {
             position: fixed;
             inset: 0;
-            background: rgba(5, 8, 15, 0.94);
-            backdrop-filter: blur(10px);
+            background: rgba(5, 5, 8, 0.95);
+            backdrop-filter: blur(12px);
             z-index: 1000;
             display: none;
             align-items: center;
@@ -407,8 +738,8 @@
             max-height: 88vh;
             border-radius: 14px;
             overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
-            border: 1px solid var(--border);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(168, 85, 247, 0.2);
+            border: 1px solid rgba(168, 85, 247, 0.3);
         }
 
         .lightbox-content img {
@@ -452,6 +783,9 @@
             font-size: 2.2rem;
             font-weight: 800;
             margin-bottom: 10px;
+            background: linear-gradient(135deg, #ffffff 40%, #e9d5ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .section-title p {
@@ -480,21 +814,22 @@
 
         .feature-card:hover {
             transform: translateY(-5px);
-            border-color: rgba(59, 130, 246, 0.4);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+            border-color: rgba(168, 85, 247, 0.45);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(168, 85, 247, 0.18);
             background: var(--bg-card-hover);
         }
 
         .feature-icon {
             width: 56px;
             height: 56px;
-            background: rgba(59, 130, 246, 0.1);
+            background: rgba(168, 85, 247, 0.12);
+            border: 1px solid rgba(168, 85, 247, 0.25);
             border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.5rem;
-            color: var(--primary);
+            color: #c084fc;
             margin-bottom: 20px;
         }
 
@@ -525,13 +860,18 @@
             padding: 24px;
             border-radius: 14px;
             margin-bottom: 16px;
+            transition: all 0.25s ease;
+        }
+
+        .step-card:hover {
+            border-color: rgba(168, 85, 247, 0.35);
         }
 
         .step-num {
             width: 44px;
             height: 44px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
+            background: linear-gradient(135deg, #7e22ce, #a855f7);
             color: white;
             display: flex;
             align-items: center;
@@ -539,6 +879,7 @@
             font-size: 1.2rem;
             font-weight: 800;
             flex-shrink: 0;
+            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
         }
 
         .step-content h4 {
@@ -552,7 +893,7 @@
         }
 
         .step-content a {
-            color: var(--primary);
+            color: #c084fc;
             text-decoration: underline;
         }
 
@@ -569,6 +910,12 @@
             border-radius: 12px;
             padding: 20px 24px;
             margin-bottom: 16px;
+            transition: all 0.25s ease;
+        }
+
+        .faq-item:hover {
+            border-color: rgba(168, 85, 247, 0.4);
+            transform: translateY(-2px);
         }
 
         .faq-item h4 {
@@ -581,7 +928,7 @@
         }
 
         .faq-item h4 i {
-            color: var(--primary);
+            color: #c084fc;
         }
 
         .faq-item p {
@@ -591,10 +938,10 @@
 
         /* Footer */
         footer {
-            border-top: 1px solid var(--border);
+            border-top: 1px solid rgba(168, 85, 247, 0.15);
             padding: 40px 8%;
             text-align: center;
-            background: #080b12;
+            background: #050508;
             color: var(--text-muted);
         }
 
@@ -603,7 +950,7 @@
         }
 
         .dev-tag {
-            color: #60a5fa;
+            color: #c084fc;
             font-weight: 800;
         }
 
@@ -624,21 +971,187 @@
             margin-left: 6px;
         }
 
+        /* Comprehensive Mobile Responsiveness */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.2rem;
-            }
             .navbar {
-                padding: 16px 5%;
+                padding: 14px 4%;
                 flex-wrap: wrap;
-                gap: 12px;
+                gap: 10px;
+            }
+            .logo {
+                font-size: 1.15rem;
+            }
+            .logo i {
+                font-size: 1.4rem;
             }
             .nav-links {
-                gap: 10px;
+                gap: 8px;
                 flex-wrap: wrap;
+                justify-content: flex-end;
             }
-            .features-grid, .steps-container, .faq-container {
-                padding: 0 5% 30px;
+            .nav-links > a:not(.btn-telegram):not([download]) {
+                display: none; /* Hide long text links on mobile to save space */
+            }
+            .btn-telegram {
+                padding: 4px 12px 4px 6px;
+                font-size: 0.8rem;
+                gap: 7px;
+            }
+            body.en .btn-telegram {
+                padding: 4px 6px 4px 12px;
+            }
+            .btn-telegram .tg-icon-circle {
+                width: 24px;
+                height: 24px;
+                font-size: 0.82rem;
+            }
+            .btn-lang {
+                padding: 6px 10px;
+                font-size: 0.8rem;
+            }
+            .btn-secondary {
+                padding: 6px 12px !important;
+                font-size: 0.85rem !important;
+            }
+
+            .hero {
+                padding: 45px 5% 35px;
+            }
+            .hero h1 {
+                font-size: clamp(1.85rem, 6.5vw, 2.4rem);
+                line-height: 1.3;
+                margin-bottom: 24px;
+            }
+            .badge {
+                font-size: 0.78rem;
+                padding: 5px 14px;
+                margin-bottom: 18px;
+            }
+            .cta-group {
+                flex-direction: column;
+                width: 100%;
+                max-width: 380px;
+                margin: 0 auto 28px;
+                gap: 12px;
+            }
+            .btn-download {
+                width: 100%;
+                justify-content: center;
+                padding: 14px 24px;
+                font-size: 1.05rem;
+            }
+            .hero .btn-secondary {
+                width: 100%;
+                justify-content: center;
+                padding: 12px 20px !important;
+                font-size: 0.95rem !important;
+            }
+            .file-meta {
+                flex-direction: column;
+                gap: 6px;
+                font-size: 0.85rem;
+            }
+            .notice-box {
+                font-size: 0.88rem;
+                padding: 12px 16px;
+                gap: 10px;
+                margin-top: 20px;
+                text-align: right;
+            }
+            body.en .notice-box {
+                text-align: left;
+            }
+            .notice-box i {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                margin: 50px 0 25px;
+                padding: 0 4%;
+            }
+            .section-title h2 {
+                font-size: 1.65rem;
+                margin-bottom: 6px;
+            }
+            .section-title p {
+                font-size: 0.92rem;
+            }
+
+            .features-grid, .gallery-grid, .steps-container, .faq-container {
+                padding: 0 4% 30px;
+                gap: 16px;
+            }
+            .gallery-img-wrap {
+                height: 190px;
+            }
+            .gallery-info {
+                padding: 16px;
+            }
+            .gallery-info h3 {
+                font-size: 1.05rem;
+            }
+            .gallery-info p {
+                font-size: 0.85rem;
+            }
+
+            .feature-card {
+                padding: 20px;
+            }
+            .feature-icon {
+                width: 48px;
+                height: 48px;
+                font-size: 1.3rem;
+                margin-bottom: 14px;
+            }
+            .feature-card h3 {
+                font-size: 1.15rem;
+            }
+            .feature-card p {
+                font-size: 0.88rem;
+            }
+
+            .step-card {
+                padding: 16px;
+                gap: 14px;
+            }
+            .step-num {
+                width: 36px;
+                height: 36px;
+                font-size: 1rem;
+            }
+            .step-content h4 {
+                font-size: 1.05rem;
+            }
+            .step-content p {
+                font-size: 0.88rem;
+            }
+
+            .faq-item {
+                padding: 16px;
+            }
+            .faq-item h4 {
+                font-size: 1rem;
+                gap: 8px;
+            }
+            .faq-item p {
+                font-size: 0.88rem;
+            }
+
+            .lightbox-close {
+                top: 15px;
+                right: 15px;
+                width: 40px;
+                height: 40px;
+                font-size: 1.5rem;
+            }
+            .lightbox-content {
+                max-width: 96vw;
+                max-height: 82vh;
+            }
+
+            footer {
+                padding: 30px 4%;
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -648,25 +1161,28 @@
     <!-- Navbar -->
     <nav class="navbar">
         <a href="#" class="logo">
-            <i class="fa-brands fa-steam"></i>
-            <span>Steam Booster</span>
+            <img src="icon.png" alt="steam tiger" class="logo-img">
+            <div class="logo-text-wrap">
+                <span class="logo-brand">steam tiger</span>
+                <span class="logo-sub">OFFICIAL SUITE</span>
+            </div>
         </a>
         <div class="nav-links">
             <a href="#features" data-i18n="nav_features">المميزات</a>
-            <a href="#gallery" data-i18n="nav_gallery">معاينة البرنامج</a>
             <a href="#how-to" data-i18n="nav_howto">طريقة الاستخدام</a>
             <a href="#faq" data-i18n="nav_faq">الأسئلة الشائعة</a>
             <!-- Telegram Contact Link -->
-            <a href="https://t.me/u9955" target="_blank" class="btn-telegram" id="navTelegramLink">
+            <a href="https://t.me/u9955" target="_blank" class="btn-telegram" id="navTelegramLink" title="Telegram: @u9955">
+                <span class="tg-pulse"></span>
                 <i class="fa-brands fa-telegram"></i>
-                <span data-i18n="telegram_contact">تواصل عبر تليجرام</span>
+                <span data-i18n="telegram_contact">للتواصل عبر تلجرام</span>
             </a>
             <!-- Language Switcher -->
             <button class="btn-lang" id="langToggle" onclick="toggleLanguage()">
                 <i class="fa-solid fa-globe"></i>
                 <span id="langText">English</span>
             </button>
-            <a href="Steam-Hour-Booster.zip" class="btn-secondary" style="padding: 8px 18px; font-size: 0.9rem;" download>
+            <a href="https://github.com/U9955/steam-booster-app/releases/download/v1.0.0/Install.steam.hours.tiger.exe" class="btn-secondary" style="padding: 8px 18px; font-size: 0.9rem; border-radius: 9999px;" download onclick="trackHoursDownload()">
                 <i class="fa-solid fa-download"></i> <span data-i18n="nav_download">تنزيل</span>
             </a>
         </div>
@@ -678,31 +1194,78 @@
             <i class="fa-solid fa-shield-halved"></i>
             <span data-i18n="hero_badge">آمن 100% وبدون حظر VAC • إصدار V1.0</span>
         </div>
-        <h1 data-i18n="hero_title">زيادة ساعات ألعاب Steam <span>بدون تحميل الألعاب</span></h1>
+        <h1 data-i18n="hero_title">حزمة أدوات Steam الاحترافية <span>لزيادة الساعات وفتح الإنجازات</span></h1>
 
-        <div class="cta-group">
-            <a href="Steam-Hour-Booster.zip" class="btn-download" download>
-                <i class="fa-solid fa-cloud-arrow-down"></i>
-                <span data-i18n="btn_download_zip">تحميل البرنامج مجاناً (ZIP)</span>
-            </a>
+        <!-- Dual Programs Showcase -->
+        <div class="programs-container" id="trophy-section">
+            <!-- Tool 1: steam hours tiger -->
+            <div class="program-card">
+                <div class="program-badge">⏱️ الأداة الأولى</div>
+                <div class="program-header">
+                    <img src="icon.png" class="program-icon" alt="steam hours tiger">
+                    <div>
+                        <h3>steam hours tiger</h3>
+                        <p data-i18n="tool1_sub">زيادة ساعات ألعاب ستيم 24/7 للحسابات المتعددة</p>
+                    </div>
+                </div>
+                <ul class="program-features">
+                    <li><i class="fa-solid fa-check"></i> <span data-i18n="tool1_f1">زيادة حتى 32 لعبة في نفس الوقت بالتوازي</span></li>
+                    <li><i class="fa-solid fa-check"></i> <span data-i18n="tool1_f2">استهلاك 0% من المعالج وبدون تحميل الألعاب</span></li>
+                    <li><i class="fa-solid fa-check"></i> <span data-i18n="tool1_f3">دعم وضع التخفي وحسابات متعددة وأمان VAC</span></li>
+                </ul>
+                <a href="https://github.com/U9955/steam-booster-app/releases/download/v1.0.0/Install.steam.hours.tiger.exe" class="btn-download" download onclick="trackHoursDownload()">
+                    <i class="fa-solid fa-cloud-arrow-down"></i>
+                    <span data-i18n="tool1_btn">تحميل steam hours tiger</span>
+                </a>
+                <div class="program-meta">مثبت شامل (Install.exe) • الحجم: 99 MB • Windows 10 & 11</div>
+            </div>
+
+            <!-- Tool 2: Steam Achievement tiger -->
+            <div class="program-card trophy-booster">
+                <div class="program-badge trophy-badge">🏆 الأداة الثانية</div>
+                <div class="program-header">
+                    <img src="achievement_icon.png" class="program-icon gold-glow" alt="Steam Achievement tiger">
+                    <div>
+                        <h3>Steam Achievement tiger</h3>
+                        <p data-i18n="tool2_sub">فتح جميع إنجازات وتروفيات ألعاب Steam بضغطة زر</p>
+                    </div>
+                </div>
+                <ul class="program-features">
+                    <li><i class="fa-solid fa-check"></i> <span data-i18n="tool2_f1">فتح جميع الإنجازات (Unlock All Achievements)</span></li>
+                    <li><i class="fa-solid fa-check"></i> <span data-i18n="tool2_f2">تحديد إنجازات معينة أو فتح الكل دفعة واحدة</span></li>
+                    <li><i class="fa-solid fa-check"></i> <span data-i18n="tool2_f3">آمن 100%، خفيف جداً، وبدون إدخال كلمات السر</span></li>
+                </ul>
+                <a href="Install.Steam.Achievement.tiger.exe" id="trophyCardDownloadBtn" class="btn-download btn-trophy" download onclick="handleTrophyDownload(event, this)">
+                    <img src="achievement_icon.png" style="width: 24px; height: 24px; border-radius: 50%; object-fit: contain; box-shadow: 0 0 10px rgba(0,0,0,0.4);" alt="Download">
+                    <span data-i18n="tool2_btn">تحميل Steam Achievement tiger</span>
+                </a>
+                <div class="program-meta" id="trophyMetaTxt">مثبت فوري (Install.exe) • الحجم: 1 MB • Windows 10 & 11</div>
+            </div>
+        </div>
+
+        <div style="display: flex; justify-content: center; margin-top: 15px;">
             <a href="#how-to" class="btn-secondary">
                 <i class="fa-solid fa-circle-play"></i>
                 <span data-i18n="btn_how_to">شرح طريقة التشغيل</span>
             </a>
         </div>
 
-        <div class="file-meta">
-            <span><i class="fa-solid fa-file-zipper"></i> <span data-i18n="meta_size">الحجم: 10 MB فقط</span></span>
-            <span><i class="fa-solid fa-check"></i> <span data-i18n="meta_ready">جاهز للاستخدام الفوري</span></span>
-            <span><i class="fa-brands fa-windows"></i> <span data-i18n="meta_os">يدعم Windows 10 & 11</span></span>
-        </div>
+        <!-- Important Ownership Notices -->
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; margin-top: 26px; width: 100%;">
+            <div class="notice-box" style="margin-top: 0;">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <div>
+                    <strong data-i18n="notice_title">ملاحظة مهمة:</strong>
+                    <span data-i18n="notice_text">يجب أن تكون اللعبة مشتراة وموجودة في مكتبة حسابك على Steam (أو لعبة مجانية مثل CS2) لتتمكن من زيادة ساعاتها.</span>
+                </div>
+            </div>
 
-        <!-- Important Ownership Notice -->
-        <div class="notice-box">
-            <i class="fa-solid fa-triangle-exclamation"></i>
-            <div>
-                <strong data-i18n="notice_title">ملاحظة مهمة:</strong>
-                <span data-i18n="notice_text">يجب أن تكون اللعبة مشتراة وموجودة في مكتبة حسابك على Steam (أو لعبة مجانية مثل CS2) لتتمكن من زيادة ساعاتها.</span>
+            <div class="notice-box" style="margin-top: 0;">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <div>
+                    <strong data-i18n="notice2_title">ملاحظة إضافية:</strong>
+                    <span data-i18n="notice2_text">لا تستطيع تشغيل الأداتين مع بعض في نفس الوقت.</span>
+                </div>
             </div>
         </div>
     </section>
@@ -763,64 +1326,6 @@
         </div>
     </div>
 
-    <!-- Screenshots Gallery -->
-    <div class="section-title" id="gallery">
-        <h2 data-i18n="gallery_title">معاينة واجهة البرنامج</h2>
-        <p data-i18n="gallery_subtitle">صور حقيقية من داخل مشغل Steam Booster ولوحة التحكم (اضغط على أي صورة لتكبيرها)</p>
-    </div>
-
-    <div class="gallery-grid">
-        <div class="gallery-card" onclick="openLightbox('screenshot1.png')">
-            <div class="gallery-img-wrap">
-                <img src="screenshot1.png" alt="Main Dashboard" loading="lazy">
-                <div class="gallery-overlay">
-                    <i class="fa-solid fa-magnifying-glass-plus"></i>
-                    <span data-i18n="gallery_zoom">اضغط للمشاهدة والتكبير</span>
-                </div>
-            </div>
-            <div class="gallery-info">
-                <h3 data-i18n="shot1_title">الواجهة الرئيسية وإدارة الحسابات</h3>
-                <p data-i18n="shot1_desc">إدارة حتى 32 لعبة في نفس الوقت، ومتابعة وقت التشغيل والبحث عن ألعاب ستيم فوراً.</p>
-            </div>
-        </div>
-
-        <div class="gallery-card" onclick="openLightbox('screenshot2.png')">
-            <div class="gallery-img-wrap">
-                <img src="screenshot2.png" alt="QR Code Login" loading="lazy">
-                <div class="gallery-overlay">
-                    <i class="fa-solid fa-magnifying-glass-plus"></i>
-                    <span data-i18n="gallery_zoom">اضغط للمشاهدة والتكبير</span>
-                </div>
-            </div>
-            <div class="gallery-info">
-                <h3 data-i18n="shot2_title">تسجيل الدخول السريع عبر كود QR</h3>
-                <p data-i18n="shot2_desc">مسح الكود من تطبيق Steam على الهاتف لتسجيل الدخول بأمان وبدون كتابة كلمة السر.</p>
-            </div>
-        </div>
-
-        <div class="gallery-card" onclick="openLightbox('screenshot3.png')">
-            <div class="gallery-img-wrap">
-                <img src="screenshot3.png" alt="Settings & Live Logs" loading="lazy">
-                <div class="gallery-overlay">
-                    <i class="fa-solid fa-magnifying-glass-plus"></i>
-                    <span data-i18n="gallery_zoom">اضغط للمشاهدة والتكبير</span>
-                </div>
-            </div>
-            <div class="gallery-info">
-                <h3 data-i18n="shot3_title">وضع التخفي وسجلات التشغيل الحية</h3>
-                <p data-i18n="shot3_desc">إخفاء نشاطك عن أصدقائك (Invisible Mode) ومتابعة سجلات العمليات لحظة بلحظة.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Lightbox Modal -->
-    <div class="lightbox-modal" id="lightboxModal" onclick="closeLightbox(event)">
-        <div class="lightbox-close" onclick="closeLightboxDirect()">&times;</div>
-        <div class="lightbox-content">
-            <img id="lightboxImg" src="" alt="Enlarged screenshot">
-        </div>
-    </div>
-
     <!-- How To Use -->
     <div class="section-title" id="how-to">
         <h2 data-i18n="howto_title">طريقة الاستخدام والتشغيل</h2>
@@ -831,24 +1336,24 @@
         <div class="step-card">
             <div class="step-num">1</div>
             <div class="step-content">
-                <h4 data-i18n="step1_title">تثبيت Node.js (إذا لم يكن مثبت عندك)</h4>
-                <p data-i18n="step1_desc">البرنامج يحتاج بيئة Node.js لتشغيل محاكي ستيم، يمكنك تحميلها مجاناً من الموقع الرسمي: <a href="https://nodejs.org" target="_blank">nodejs.org</a> (اختر نسخة LTS).</p>
+                <h4 data-i18n="step1_title">تحميل برنامج التثبيت</h4>
+                <p data-i18n="step1_desc">حمّل ملف التثبيت المباشر والشامل <a href="https://github.com/U9955/steam-booster-app/releases/download/v1.0.0/Install.steam.hours.tiger.exe" download>Install.steam.hours.tiger.exe</a> بضغطة زر واحدة.</p>
             </div>
         </div>
 
         <div class="step-card">
             <div class="step-num">2</div>
             <div class="step-content">
-                <h4 data-i18n="step2_title">فك ضغط الملف</h4>
-                <p data-i18n="step2_desc">بعد تحميل ملف <a href="Steam-Hour-Booster.zip" download>Steam-Hour-Booster.zip</a>، فك الضغط عنه في أي مجلد تريده.</p>
+                <h4 data-i18n="step2_title">تثبيت البرنامج بضغطة زر</h4>
+                <p data-i18n="step2_desc">شغّل ملف التثبيت، وسيقوم بضبط كل شيء تلقائياً بدون الحاجة لتثبيت أي برامج خارجية نهائياً.</p>
             </div>
         </div>
 
         <div class="step-card">
             <div class="step-num">3</div>
             <div class="step-content">
-                <h4 data-i18n="step3_title">تشغيل البرنامج</h4>
-                <p data-i18n="step3_desc">اضغط مرتين على ملف <strong>start.bat</strong> (سيقوم تلقائياً بتجهيز الحزم وفتح واجهة البرنامج الأنيقة أمامك).</p>
+                <h4 data-i18n="step3_title">تشغيل البرنامج من سطح المكتب</h4>
+                <p data-i18n="step3_desc">اضغط على اختصار البرنامج الذي تم إنشاؤه على سطح المكتب لتفتح لوحة التحكم فوراً.</p>
             </div>
         </div>
 
@@ -856,7 +1361,7 @@
             <div class="step-num">4</div>
             <div class="step-content">
                 <h4 data-i18n="step4_title">تسجيل الدخول وإضافة الألعاب</h4>
-                <p data-i18n="step4_desc">اكتب اسم مستخدم حساب ستيم والباسورد وكود التحقق لمرة واحدة فقط، ثم ابحث عن ألعابك المفضلة وأضفها لتبدأ الساعات بالزيادة فوراً!</p>
+                <p data-i18n="step4_desc">سجل الدخول بمسح كود QR عبر تطبيق ستيم أو باليوزر، ثم ابحث عن ألعابك وأضفها لتبدأ الساعات بالزيادة فوراً!</p>
             </div>
         </div>
     </div>
@@ -887,17 +1392,49 @@
             <h4><i class="fa-solid fa-circle-question"></i> <span data-i18n="q4_title">هل يمكنني زيادة ساعات لعبة لا أملكها في حسابي؟</span></h4>
             <p data-i18n="q4_desc">كلا، يجب أن تكون اللعبة مشتراة وموجودة في مكتبتك على Steam (أو لعبة مجانية مثل CS2) لتتمكن من زيادة ساعاتها، لأن خوادم ستيم لا تحتسب ساعات للألعاب غير المملوكة.</p>
         </div>
+    <!-- Steam Achievement tiger Modal Window -->
+    <div id="trophyModal" class="modal-overlay" onclick="closeTrophyModalOnBackdrop(event)">
+        <div class="modal-box">
+            <div class="modal-header">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <img src="achievement_icon.png" alt="Steam Achievement tiger" style="width: 44px; height: 44px; border-radius: 50%; object-fit: contain; box-shadow: 0 0 16px rgba(245, 158, 11, 0.5); border: 1.5px solid rgba(251, 191, 36, 0.4); flex-shrink: 0;">
+                    <div>
+                        <h3 style="margin: 0; color: #fbbf24; font-size: 1.25rem;">Steam Achievement tiger 🏆</h3>
+                        <div style="font-size: 0.85rem; color: #94a3b8;" data-i18n="modal_trophy_sub">أداة فتح وترقية إنجازات ألعاب ستيم</div>
+                    </div>
+                </div>
+                <button class="modal-close-btn" onclick="closeTrophyModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p style="font-size: 0.95rem; line-height: 1.7; color: #cbd5e1; margin-bottom: 16px;" data-i18n="modal_trophy_desc">
+                    أداة متطورة وخفيفة تمكنك من فتح كافة إنجازات وتروفيات ألعاب مكتبتك على ستيم (Steam Achievements) بنسبة 100% بضغطة زر واحدة وبأمان تام.
+                </p>
+                <div style="background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.25); border-radius: 12px; padding: 14px; margin-bottom: 20px;">
+                    <div style="font-weight: 700; color: #fbbf24; margin-bottom: 6px; font-size: 0.9rem;" data-i18n="modal_trophy_features_title">✨ مميزات أداة الإنجازات:</div>
+                    <div style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.8;">
+                        • فتح كافة إنجازات أي لعبة على ستيم دفعة واحدة.<br>
+                        • إمكانية تحديد إنجازات وتروفيات معينة وإلغاء قفل أخرى.<br>
+                        • آمن تماماً، بدون إدخال كلمة سر الحساب، وبحماية VAC كاملة.
+                    </div>
+                </div>
+                <a href="Install.Steam.Achievement.tiger.exe" id="modalTrophyDownloadBtn" class="btn-download btn-trophy" style="width: 100%; justify-content: center;" download onclick="handleTrophyDownload(event, this)">
+                    <img src="achievement_icon.png" style="width: 22px; height: 22px; border-radius: 50%; object-fit: contain; box-shadow: 0 0 10px rgba(0,0,0,0.4);" alt="Download">
+                    <span data-i18n="modal_trophy_btn">تحميل Steam Achievement tiger</span>
+                </a>
+            </div>
+        </div>
     </div>
 
     <!-- Footer -->
     <footer>
-        <p style="margin-bottom: 8px;" data-i18n="footer_copy">جميع الحقوق محفوظة © Steam Hour Booster</p>
+        <p style="margin-bottom: 8px;" data-i18n="footer_copy">جميع الحقوق محفوظة © steam hours tiger</p>
         <p style="margin-bottom: 6px;"><span data-i18n="footer_team">اسم الفريق المطور:</span> <span class="team-tag">Tiger Team</span></p>
-        <p><span data-i18n="footer_dev">تمت البرمجة والتطوير بواسطة:</span> <span class="dev-tag">Ahmad</span></p>
+        <p><span data-i18n="footer_dev">تمت البرمجة والتطوير بواسطة:</span> <a href="admin.html" class="dev-tag" style="text-decoration: none;" title="لوحة التحكم • Admin">Ahmad <i class="fa-solid fa-lock" style="font-size: 0.7rem; opacity: 0.5;"></i></a></p>
         <div class="footer-social">
             <a href="https://t.me/u9955" target="_blank" class="btn-telegram" style="margin-top: 14px; display: inline-flex;" id="footerTelegramLink">
+                <span class="tg-pulse"></span>
                 <i class="fa-brands fa-telegram"></i>
-                <span data-i18n="telegram_contact">تواصل عبر تليجرام</span>
+                <span data-i18n="telegram_contact">للتواصل عبر تلجرام</span>
             </a>
         </div>
     </footer>
@@ -911,9 +1448,9 @@
                 nav_howto: "طريقة الاستخدام",
                 nav_faq: "الأسئلة الشائعة",
                 nav_download: "تنزيل",
-                telegram_contact: "تواصل عبر تليجرام",
+                telegram_contact: "للتواصل عبر تلجرام",
                 hero_badge: "آمن 100% وبدون حظر VAC • إصدار V1.0",
-                hero_title: "زيادة ساعات ألعاب Steam <span>بدون تحميل الألعاب</span>",
+                hero_title: "حزمة أدوات Steam الاحترافية <span>لزيادة الساعات وفتح الإنجازات</span>",
                 btn_download_zip: "تحميل البرنامج مجاناً (ZIP)",
                 btn_how_to: "شرح طريقة التشغيل",
                 meta_size: "الحجم: 10 MB فقط (جاهز مسبقاً)",
@@ -921,6 +1458,8 @@
                 meta_os: "يدعم Windows 10 & 11",
                 notice_title: "ملاحظة مهمة:",
                 notice_text: "يجب أن تكون اللعبة مشتراة وموجودة في مكتبة حسابك على Steam (أو لعبة مجانية مثل CS2) لتتمكن من زيادة ساعاتها.",
+                notice2_title: "ملاحظة إضافية:",
+                notice2_text: "لا تستطيع تشغيل الأداتين مع بعض في نفس الوقت.",
                 features_title: "أبرز المميزات",
                 features_subtitle: "تم تصميم الأداة لتوفر لك أعلى كفاءة وأمان كامل لحسابك",
                 feat1_title: "حتى 32 لعبة بالتوازي",
@@ -937,14 +1476,14 @@
                 feat6_desc: "يمكنك إضافة أكثر من حساب ستيم في نفس الوقت وإدارة كل حساب وألعابه بشكل مستقل تماماً.",
                 howto_title: "طريقة الاستخدام والتشغيل",
                 howto_subtitle: "خطوات بسيطة جداً للبدء بزيادة الساعات في أقل من دقيقة",
-                step1_title: "تثبيت Node.js (إذا لم يكن مثبت عندك)",
-                step1_desc: "البرنامج يحتاج بيئة Node.js لتشغيل محاكي ستيم، يمكنك تحميلها مجاناً من الموقع الرسمي: <a href='https://nodejs.org' target='_blank'>nodejs.org</a> (اختر نسخة LTS).",
-                step2_title: "فك ضغط الملف",
-                step2_desc: "بعد تحميل ملف <a href='Steam-Hour-Booster.zip' download>Steam-Hour-Booster.zip</a>، فك الضغط عنه في أي مجلد تريده.",
-                step3_title: "تشغيل البرنامج",
-                step3_desc: "اضغط مرتين على أيقونة البرنامج <strong>Steam Booster.exe</strong> (أو ملف start.bat) وسيفتح لك واجهة البرنامج مباشرة وبدون أي تعقيد!",
+                step1_title: "تحميل برنامج التثبيت",
+                step1_desc: "حمّل ملف التثبيت المباشر والشامل <a href='Install.steam.hours.tiger.exe' download>Install.steam.hours.tiger.exe</a> بضغطة زر واحدة.",
+                step2_title: "تثبيت البرنامج بضغطة زر",
+                step2_desc: "شغّل ملف التثبيت، وسيقوم بضبط كل شيء تلقائياً بدون الحاجة لتثبيت أي برامج خارجية نهائياً.",
+                step3_title: "تشغيل البرنامج من سطح المكتب",
+                step3_desc: "اضغط على اختصار البرنامج الذي تم إنشاؤه على سطح المكتب لتفتح لوحة التحكم فوراً.",
                 step4_title: "تسجيل الدخول وإضافة الألعاب",
-                step4_desc: "اكتب اسم مستخدم حساب ستيم والباسورد وكود التحقق لمرة واحدة فقط، ثم ابحث عن ألعابك المفضلة وأضفها لتبدأ الساعات بالزيادة فوراً!",
+                step4_desc: "سجل الدخول بمسح كود QR عبر تطبيق ستيم أو باليوزر، ثم ابحث عن ألعابك وأضفها لتبدأ الساعات بالزيادة فوراً!",
                 faq_title: "الأسئلة الشائعة",
                 faq_subtitle: "إجابات على أهم الاستفسارات حول البرنامج",
                 q1_title: "هل يسبب البرنامج باند VAC على حسابي في Steam؟",
@@ -957,7 +1496,7 @@
                 q4_desc: "كلا، يجب أن تكون اللعبة مشتراة وموجودة في مكتبتك على Steam (أو لعبة مجانية مثل CS2) لتتمكن من زيادة ساعاتها، لأن خوادم ستيم لا تحتسب ساعات للألعاب غير المملوكة.",
                 nav_gallery: "معاينة البرنامج",
                 gallery_title: "معاينة واجهة البرنامج",
-                gallery_subtitle: "صور حقيقية من داخل مشغل Steam Booster ولوحة التحكم (اضغط على أي صورة لتكبيرها)",
+                gallery_subtitle: "صور حقيقية من داخل مشغل steam Tiger ولوحة التحكم (اضغط على أي صورة لتكبيرها)",
                 gallery_zoom: "اضغط للمشاهدة والتكبير",
                 shot1_title: "الواجهة الرئيسية وإدارة الحسابات",
                 shot1_desc: "إدارة حتى 32 لعبة في نفس الوقت، ومتابعة وقت التشغيل والبحث عن ألعاب ستيم فوراً.",
@@ -965,9 +1504,24 @@
                 shot2_desc: "مسح الكود من تطبيق Steam على الهاتف لتسجيل الدخول بأمان وبدون كتابة كلمة السر.",
                 shot3_title: "وضع التخفي وسجلات التشغيل الحية",
                 shot3_desc: "إخفاء نشاطك عن أصدقائك (Invisible Mode) ومتابعة سجلات العمليات لحظة بلحظة.",
-                footer_copy: "جميع الحقوق محفوظة © Steam Hour Booster",
+                footer_copy: "جميع الحقوق محفوظة © steam hours tiger",
                 footer_team: "اسم الفريق المطور:",
-                footer_dev: "تمت البرمجة والتطوير بواسطة:"
+                footer_dev: "تمت البرمجة والتطوير بواسطة:",
+                nav_trophy: "ستيم أتشيفمنت 🏆",
+                tool1_sub: "زيادة ساعات ألعاب ستيم 24/7 للحسابات المتعددة",
+                tool1_f1: "زيادة حتى 32 لعبة في نفس الوقت بالتوازي",
+                tool1_f2: "استهلاك 0% من المعالج وبدون تحميل الألعاب",
+                tool1_f3: "دعم وضع التخفي وحسابات متعددة وأمان VAC",
+                tool1_btn: "تحميل steam hours tiger",
+                tool2_sub: "فتح جميع إنجازات وتروفيات ألعاب Steam بضغطة زر",
+                tool2_f1: "فتح جميع الإنجازات (Unlock All Achievements)",
+                tool2_f2: "تحديد إنجازات معينة أو فتح الكل دفعة واحدة",
+                tool2_f3: "آمن 100%، خفيف جداً، وبدون إدخال كلمات السر",
+                tool2_btn: "تحميل Steam Achievement tiger",
+                modal_trophy_sub: "أداة فتح وترقية إنجازات ألعاب ستيم",
+                modal_trophy_desc: "أداة متطورة وخفيفة تمكنك من فتح كافة إنجازات وتروفيات ألعاب مكتبتك على ستيم (Steam Achievements) بنسبة 100% بضغطة زر واحدة وبأمان تام.",
+                modal_trophy_features_title: "✨ مميزات أداة الإنجازات:",
+                modal_trophy_btn: "تحميل Steam Achievement tiger"
             },
             en: {
                 langButton: "العربية",
@@ -976,16 +1530,18 @@
                 nav_howto: "How To Use",
                 nav_faq: "FAQ",
                 nav_download: "Download",
-                telegram_contact: "Contact on Telegram",
+                telegram_contact: "Contact via Telegram",
                 hero_badge: "100% Safe • No VAC Ban • Version V1.0",
-                hero_title: "Boost Steam Hours <span>Without Downloading Games</span>",
-                btn_download_zip: "Download Free (ZIP)",
+                hero_title: "Ultimate Steam Suite <span>Hours Boosting & Achievement Unlocker</span>",
+                btn_download_zip: "Download Free",
                 btn_how_to: "Setup Guide",
-                meta_size: "Size: 10 MB only (Pre-bundled)",
+                meta_size: "Size: 99 MB",
                 meta_ready: "Instant Ready to Run",
                 meta_os: "Supports Windows 10 & 11",
                 notice_title: "Important Note:",
                 notice_text: "You must own/purchase the game in your Steam library (or have added a free-to-play game like CS2) to be able to boost its hours.",
+                notice2_title: "Additional Note:",
+                notice2_text: "You cannot run both tools together at the same time.",
                 features_title: "Key Features",
                 features_subtitle: "Designed to provide maximum efficiency and absolute security for your Steam accounts",
                 feat1_title: "Up to 32 Games Simultaneously",
@@ -1001,7 +1557,7 @@
                 feat6_title: "Multi-Account Support",
                 feat6_desc: "Add and manage multiple Steam accounts simultaneously, running independent games per account.",
                 gallery_title: "Launcher Preview & Screenshots",
-                gallery_subtitle: "Real screenshots from inside Steam Booster dashboard (Click any image to enlarge)",
+                gallery_subtitle: "Real screenshots from inside steam Tiger dashboard (Click any image to enlarge)",
                 gallery_zoom: "Click to preview full size",
                 shot1_title: "Main Dashboard & Multi-Account",
                 shot1_desc: "Boost up to 32 games in parallel, track continuous uptime, and search the Steam store instantly.",
@@ -1011,14 +1567,14 @@
                 shot3_desc: "Appear offline/invisible to friends and monitor real-time system connection logs.",
                 howto_title: "How To Use & Setup",
                 howto_subtitle: "Simple steps to start boosting your game hours in under a minute",
-                step1_title: "Install Node.js (If not already installed)",
-                step1_desc: "Requires Node.js runtime to simulate Steam client. Download free from official site: <a href='https://nodejs.org' target='_blank'>nodejs.org</a> (LTS version).",
-                step2_title: "Extract the ZIP Archive",
-                step2_desc: "After downloading <a href='Steam-Hour-Booster.zip' download>Steam-Hour-Booster.zip</a>, extract it to any folder on your PC.",
-                step3_title: "Launch the Program",
-                step3_desc: "Double-click <strong>Steam Booster.exe</strong> (or start.bat) and the native app window will open instantly without terminal clutter!",
+                step1_title: "Download Installer",
+                step1_desc: "Download the all-in-one setup package <a href='Install.steam.hours.tiger.exe' download>Install.steam.hours.tiger.exe</a>.",
+                step2_title: "One-Click Installation",
+                step2_desc: "Run the setup wizard; it configures everything automatically with zero external dependencies.",
+                step3_title: "Launch from Desktop",
+                step3_desc: "Launch the app anytime directly from the desktop shortcut created by the installer.",
                 step4_title: "Login & Add Your Games",
-                step4_desc: "Enter your Steam username, password, and Steam Guard code once. Search for your games, add them, and hours begin boosting immediately!",
+                step4_desc: "Scan QR code or use credentials once. Search for your games, add them, and hours begin boosting immediately!",
                 faq_title: "Frequently Asked Questions",
                 faq_subtitle: "Answers to the most common questions about the booster",
                 q1_title: "Can this cause a VAC Ban on my Steam account?",
@@ -1029,9 +1585,24 @@
                 q3_desc: "Yes! The dashboard supports adding multiple independent Steam accounts, idling distinct game lists simultaneously.",
                 q4_title: "Can I boost hours for a game I do not own?",
                 q4_desc: "No. You must own/purchase the game in your Steam library (or have added a free-to-play game like CS2) to boost its hours, as Steam servers do not record time for unowned games.",
-                footer_copy: "All Rights Reserved © Steam Hour Booster",
+                footer_copy: "All Rights Reserved © steam hours tiger",
                 footer_team: "Developer Team:",
-                footer_dev: "Designed & Developed by:"
+                footer_dev: "Designed & Developed by:",
+                nav_trophy: "Steam Achievement 🏆",
+                tool1_sub: "Continuous 24/7 Steam hours idler for multiple accounts",
+                tool1_f1: "Boost up to 32 games in parallel simultaneously",
+                tool1_f2: "0% CPU load without downloading games",
+                tool1_f3: "Invisible Mode, multi-account support & VAC safe",
+                tool1_btn: "Download steam hours tiger",
+                tool2_sub: "Unlock all Steam game achievements & trophies instantly",
+                tool2_f1: "Unlock 100% achievements for any Steam game",
+                tool2_f2: "Select specific achievements or unlock all at once",
+                tool2_f3: "100% Safe, ultra-lightweight, no password needed",
+                tool2_btn: "Download Steam Achievement tiger",
+                modal_trophy_sub: "Steam Achievements & Trophies Unlocker Tool",
+                modal_trophy_desc: "Powerful and lightweight utility to unlock 100% of your Steam game achievements safely with a single click.",
+                modal_trophy_features_title: "✨ Tool Features:",
+                modal_trophy_btn: "Download Steam Achievement tiger"
             }
         };
 
@@ -1065,37 +1636,122 @@
             applyLanguage(nextLang);
         }
 
-        // Lightbox Functions
-        function openLightbox(src) {
-            const modal = document.getElementById('lightboxModal');
-            const img = document.getElementById('lightboxImg');
-            img.src = src;
-            modal.style.display = 'flex';
-            setTimeout(() => modal.classList.add('active'), 10);
-            document.body.style.overflow = 'hidden';
+        // Steam Achievement tiger Modal Functions
+        function openTrophyModal() {
+            const modal = document.getElementById('trophyModal');
+            if (modal) {
+                modal.style.display = 'flex';
+                setTimeout(() => modal.classList.add('active'), 10);
+                document.body.style.overflow = 'hidden';
+            }
         }
 
-        function closeLightboxDirect() {
-            const modal = document.getElementById('lightboxModal');
-            modal.classList.remove('active');
-            setTimeout(() => {
-                modal.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }, 300);
+        function closeTrophyModal() {
+            const modal = document.getElementById('trophyModal');
+            if (modal) {
+                modal.classList.remove('active');
+                setTimeout(() => {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }, 300);
+            }
         }
 
-        function closeLightbox(e) {
-            if (e.target.id === 'lightboxModal') {
-                closeLightboxDirect();
+        function closeTrophyModalOnBackdrop(e) {
+            if (e.target.id === 'trophyModal') {
+                closeTrophyModal();
+            }
+        }
+
+        function handleTrophyDownload(event, btn) {
+            trackTrophyDownload();
+            console.log('Downloading Steam Achievement tiger...');
+        }
+
+        function trackHoursDownload() {
+            try {
+                let count = parseInt(localStorage.getItem('stat_hours_dl') || '89', 10) + 1;
+                localStorage.setItem('stat_hours_dl', count);
+            } catch(e) {}
+        }
+
+        function trackTrophyDownload() {
+            try {
+                let count = parseInt(localStorage.getItem('stat_trophy_dl') || '37', 10) + 1;
+                localStorage.setItem('stat_trophy_dl', count);
+            } catch(e) {}
+        }
+
+        // Apply any overrides from Admin Panel
+        function applyAdminDynamicSettings() {
+            // Track visits
+            try {
+                let v = parseInt(localStorage.getItem('stat_visits') || '142', 10) + 1;
+                localStorage.setItem('stat_visits', v);
+            } catch(e) {}
+
+            // Tool 1 settings
+            const t1Link = localStorage.getItem('cfg_tool1_link');
+            if (t1Link) {
+                document.querySelectorAll('a[href*="Install.steam.hours.tiger.exe"]').forEach(a => a.href = t1Link);
+            }
+            const t1Meta = localStorage.getItem('cfg_tool1_meta');
+            const tool1MetaEl = document.querySelector('.program-card:first-child .program-meta');
+            if (t1Meta && tool1MetaEl) tool1MetaEl.innerText = t1Meta;
+
+            const t1Sub = localStorage.getItem('cfg_tool1_sub');
+            const tool1SubEl = document.querySelector('.program-card:first-child .program-header p');
+            if (t1Sub && tool1SubEl) tool1SubEl.innerText = t1Sub;
+
+            const t2Link = localStorage.getItem('cfg_tool2_link');
+            if (t2Link) {
+                document.querySelectorAll('#trophyCardDownloadBtn, #modalTrophyDownloadBtn').forEach(a => a.href = t2Link);
+            }
+            const t2Meta = localStorage.getItem('cfg_tool2_meta');
+            const trophyMetaEl = document.getElementById('trophyMetaTxt');
+            if (t2Meta && trophyMetaEl) trophyMetaEl.innerText = t2Meta;
+
+            const t2Sub = localStorage.getItem('cfg_tool2_sub');
+            const tool2SubEl = document.querySelector('.program-card.trophy-booster .program-header p');
+            if (t2Sub && tool2SubEl) tool2SubEl.innerText = t2Sub;
+
+            // Notices
+            const n1 = localStorage.getItem('cfg_notice1');
+            const n1El = document.querySelector('[data-i18n="notice_text"]');
+            if (n1 && n1El) n1El.innerText = n1;
+
+            const n2 = localStorage.getItem('cfg_notice2');
+            const n2El = document.querySelector('[data-i18n="notice2_text"]');
+            if (n2 && n2El) n2El.innerText = n2;
+
+            const showN2 = localStorage.getItem('cfg_show_notice2');
+            if (showN2 === 'false') {
+                const notice2Box = n2El ? n2El.closest('.notice-box') : null;
+                if (notice2Box) notice2Box.style.display = 'none';
+            }
+
+            // Telegram
+            const tgLink = localStorage.getItem('cfg_tg_link');
+            if (tgLink) {
+                const navTg = document.getElementById('navTelegramLink');
+                if (navTg) navTg.href = tgLink;
+                const footTg = document.getElementById('footerTelegramLink');
+                if (footTg) footTg.href = tgLink;
+            }
+            const tgText = localStorage.getItem('cfg_tg_text');
+            if (tgText) {
+                document.querySelectorAll('[data-i18n="telegram_contact"]').forEach(el => el.innerText = tgText);
             }
         }
 
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeLightboxDirect();
+            if (e.key === 'Escape') closeTrophyModal();
         });
 
         // Initialize on load
         applyLanguage(currentLang);
+        applyAdminDynamicSettings();
     </script>
 </body>
 </html>
+
