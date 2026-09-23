@@ -1,10 +1,10 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>steam Tiger - زيادة ساعات ألعاب ستيم</title>
-    <meta name="description" content="steam Tiger - أداة لزيادة ساعات ألعاب ستيم بدون تحميل وبأمان تام. تطوير أحمد.">
+    <title>steam hours tiger - زيادة ساعات ألعاب ستيم 24/7</title>
+    <meta name="description" content="steam hours tiger - أداة احترافية لزيادة ساعات ألعاب ستيم بدون تحميل وبأمان تام 24/7. تطوير أحمد.">
     <link rel="icon" type="image/png" href="icon.png">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -341,30 +341,7 @@
             box-shadow: 0 4px 18px rgba(168, 85, 247, 0.2);
         }
 
-        /* Trophy Nav Button */
-        .btn-trophy-nav {
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-            background: rgba(245, 158, 11, 0.12);
-            color: #fbbf24;
-            border: 1px solid rgba(245, 158, 11, 0.35);
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-size: 0.88rem;
-            font-weight: 700;
-            text-decoration: none;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-        .btn-trophy-nav:hover {
-            background: #f59e0b;
-            color: #1c1917;
-            box-shadow: 0 0 15px rgba(245, 158, 11, 0.5);
-            transform: translateY(-2px);
-        }
-
-        /* Dual Programs Showcase */
+        /* Programs Showcase */
         .tools-section {
             padding: 20px 8% 60px;
         }
@@ -401,16 +378,6 @@
             box-shadow: 0 20px 45px rgba(0, 0, 0, 0.8), 0 0 30px rgba(168, 85, 247, 0.25);
         }
 
-        .program-card.trophy-booster {
-            border-color: rgba(245, 158, 11, 0.3);
-            background: linear-gradient(145deg, #140f1a 0%, #090710 100%);
-        }
-
-        .program-card.trophy-booster:hover {
-            border-color: rgba(245, 158, 11, 0.65);
-            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.8), 0 0 35px rgba(245, 158, 11, 0.28);
-        }
-
         .program-badge {
             align-self: flex-start;
             padding: 5px 14px;
@@ -421,12 +388,6 @@
             font-size: 0.82rem;
             font-weight: 800;
             margin-bottom: 18px;
-        }
-
-        .trophy-badge {
-            background: rgba(245, 158, 11, 0.15);
-            border-color: rgba(245, 158, 11, 0.4);
-            color: #fbbf24;
         }
 
         .program-header {
@@ -444,26 +405,6 @@
             box-shadow: 0 0 16px rgba(168, 85, 247, 0.5);
             flex-shrink: 0;
             background: #0d0a17;
-        }
-
-        .program-icon.gold-glow {
-            box-shadow: 0 0 20px rgba(245, 158, 11, 0.65);
-            border: 1px solid rgba(245, 158, 11, 0.4);
-            background: #151009;
-        }
-
-        .trophy-icon-wrap {
-            width: 52px;
-            height: 52px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #b45309 0%, #f59e0b 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #ffffff;
-            font-size: 1.5rem;
-            box-shadow: 0 0 20px rgba(245, 158, 11, 0.5);
-            flex-shrink: 0;
         }
 
         .program-header h3 {
@@ -499,93 +440,11 @@
             font-size: 0.95rem;
         }
 
-        .btn-trophy {
-            background: linear-gradient(135deg, #b45309 0%, #f59e0b 100%) !important;
-            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.35) !important;
-        }
-
-        .btn-trophy:hover {
-            background: linear-gradient(135deg, #d97706 0%, #fbbf24 100%) !important;
-            box-shadow: 0 15px 35px rgba(245, 158, 11, 0.55) !important;
-        }
-
         .program-meta {
             margin-top: 14px;
             font-size: 0.82rem;
             color: var(--text-muted);
             text-align: center;
-        }
-
-        /* Trophy Modal Window */
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(5, 5, 8, 0.88);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            z-index: 1000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .modal-overlay.active {
-            display: flex;
-            opacity: 1;
-        }
-
-        .modal-box {
-            background: linear-gradient(145deg, #120e1a 0%, #080710 100%);
-            border: 1px solid rgba(245, 158, 11, 0.35);
-            border-radius: 22px;
-            max-width: 520px;
-            width: 100%;
-            padding: 28px;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 35px rgba(245, 158, 11, 0.25);
-            position: relative;
-            transform: translateY(20px);
-            transition: transform 0.3s ease;
-            text-align: right;
-        }
-
-        body.en .modal-box {
-            text-align: left;
-        }
-
-        .modal-overlay.active .modal-box {
-            transform: translateY(0);
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 18px;
-            padding-bottom: 14px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .modal-close-btn {
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            color: #94a3b8;
-            font-size: 1.4rem;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .modal-close-btn:hover {
-            background: rgba(239, 68, 68, 0.85);
-            color: #fff;
         }
 
         .file-meta {
@@ -1194,13 +1053,13 @@
             <i class="fa-solid fa-shield-halved"></i>
             <span data-i18n="hero_badge">آمن 100% وبدون حظر VAC • إصدار V1.0</span>
         </div>
-        <h1 data-i18n="hero_title">حزمة أدوات Steam الاحترافية <span>لزيادة الساعات وفتح الإنجازات</span></h1>
+        <h1 data-i18n="hero_title">أداة ستيم الاحترافية <span>لزيادة الساعات بدون تحميل 24/7</span></h1>
 
-        <!-- Dual Programs Showcase -->
-        <div class="programs-container" id="trophy-section">
-            <!-- Tool 1: steam hours tiger -->
-            <div class="program-card">
-                <div class="program-badge">⏱️ الأداة الأولى</div>
+        <!-- Single Program Showcase -->
+        <div class="programs-container" style="max-width: 620px; margin: 0 auto 28px;">
+            <!-- steam hours tiger -->
+            <div class="program-card" style="box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45), 0 0 30px rgba(168, 85, 247, 0.22); border-color: rgba(168, 85, 247, 0.35);">
+                <div class="program-badge">⚡ البرنامج الرسمي</div>
                 <div class="program-header">
                     <img src="icon.png" class="program-icon" alt="steam hours tiger">
                     <div>
@@ -1217,29 +1076,7 @@
                     <i class="fa-solid fa-cloud-arrow-down"></i>
                     <span data-i18n="tool1_btn">تحميل steam hours tiger</span>
                 </a>
-                <div class="program-meta">مثبت شامل (Install.exe) • الحجم: 99 MB • Windows 10 & 11</div>
-            </div>
-
-            <!-- Tool 2: Steam Achievement tiger -->
-            <div class="program-card trophy-booster">
-                <div class="program-badge trophy-badge">🏆 الأداة الثانية</div>
-                <div class="program-header">
-                    <img src="achievement_icon.png" class="program-icon gold-glow" alt="Steam Achievement tiger">
-                    <div>
-                        <h3>Steam Achievement tiger</h3>
-                        <p data-i18n="tool2_sub">فتح جميع إنجازات وتروفيات ألعاب Steam بضغطة زر</p>
-                    </div>
-                </div>
-                <ul class="program-features">
-                    <li><i class="fa-solid fa-check"></i> <span data-i18n="tool2_f1">فتح جميع الإنجازات (Unlock All Achievements)</span></li>
-                    <li><i class="fa-solid fa-check"></i> <span data-i18n="tool2_f2">تحديد إنجازات معينة أو فتح الكل دفعة واحدة</span></li>
-                    <li><i class="fa-solid fa-check"></i> <span data-i18n="tool2_f3">آمن 100%، خفيف جداً، وبدون إدخال كلمات السر</span></li>
-                </ul>
-                <a href="Install.Steam.Achievement.tiger.exe" id="trophyCardDownloadBtn" class="btn-download btn-trophy" download onclick="handleTrophyDownload(event, this)">
-                    <img src="achievement_icon.png" style="width: 24px; height: 24px; border-radius: 50%; object-fit: contain; box-shadow: 0 0 10px rgba(0,0,0,0.4);" alt="Download">
-                    <span data-i18n="tool2_btn">تحميل Steam Achievement tiger</span>
-                </a>
-                <div class="program-meta" id="trophyMetaTxt">مثبت فوري (Install.exe) • الحجم: 1 MB • Windows 10 & 11</div>
+                <div class="program-meta">مثبت شامل (Install.exe) • الحجم: 101 MB • Windows 10 & 11</div>
             </div>
         </div>
 
@@ -1250,21 +1087,13 @@
             </a>
         </div>
 
-        <!-- Important Ownership Notices -->
+        <!-- Important Ownership Notice -->
         <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; margin-top: 26px; width: 100%;">
             <div class="notice-box" style="margin-top: 0;">
                 <i class="fa-solid fa-triangle-exclamation"></i>
                 <div>
                     <strong data-i18n="notice_title">ملاحظة مهمة:</strong>
                     <span data-i18n="notice_text">يجب أن تكون اللعبة مشتراة وموجودة في مكتبة حسابك على Steam (أو لعبة مجانية مثل CS2) لتتمكن من زيادة ساعاتها.</span>
-                </div>
-            </div>
-
-            <div class="notice-box" style="margin-top: 0;">
-                <i class="fa-solid fa-circle-exclamation"></i>
-                <div>
-                    <strong data-i18n="notice2_title">ملاحظة إضافية:</strong>
-                    <span data-i18n="notice2_text">لا تستطيع تشغيل الأداتين مع بعض في نفس الوقت.</span>
                 </div>
             </div>
         </div>
@@ -1390,38 +1219,6 @@
 
         <div class="faq-item">
             <h4><i class="fa-solid fa-circle-question"></i> <span data-i18n="q4_title">هل يمكنني زيادة ساعات لعبة لا أملكها في حسابي؟</span></h4>
-            <p data-i18n="q4_desc">كلا، يجب أن تكون اللعبة مشتراة وموجودة في مكتبتك على Steam (أو لعبة مجانية مثل CS2) لتتمكن من زيادة ساعاتها، لأن خوادم ستيم لا تحتسب ساعات للألعاب غير المملوكة.</p>
-        </div>
-    <!-- Steam Achievement tiger Modal Window -->
-    <div id="trophyModal" class="modal-overlay" onclick="closeTrophyModalOnBackdrop(event)">
-        <div class="modal-box">
-            <div class="modal-header">
-                <div style="display: flex; align-items: center; gap: 12px;">
-                    <img src="achievement_icon.png" alt="Steam Achievement tiger" style="width: 44px; height: 44px; border-radius: 50%; object-fit: contain; box-shadow: 0 0 16px rgba(245, 158, 11, 0.5); border: 1.5px solid rgba(251, 191, 36, 0.4); flex-shrink: 0;">
-                    <div>
-                        <h3 style="margin: 0; color: #fbbf24; font-size: 1.25rem;">Steam Achievement tiger 🏆</h3>
-                        <div style="font-size: 0.85rem; color: #94a3b8;" data-i18n="modal_trophy_sub">أداة فتح وترقية إنجازات ألعاب ستيم</div>
-                    </div>
-                </div>
-                <button class="modal-close-btn" onclick="closeTrophyModal()">&times;</button>
-            </div>
-            <div class="modal-body">
-                <p style="font-size: 0.95rem; line-height: 1.7; color: #cbd5e1; margin-bottom: 16px;" data-i18n="modal_trophy_desc">
-                    أداة متطورة وخفيفة تمكنك من فتح كافة إنجازات وتروفيات ألعاب مكتبتك على ستيم (Steam Achievements) بنسبة 100% بضغطة زر واحدة وبأمان تام.
-                </p>
-                <div style="background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.25); border-radius: 12px; padding: 14px; margin-bottom: 20px;">
-                    <div style="font-weight: 700; color: #fbbf24; margin-bottom: 6px; font-size: 0.9rem;" data-i18n="modal_trophy_features_title">✨ مميزات أداة الإنجازات:</div>
-                    <div style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.8;">
-                        • فتح كافة إنجازات أي لعبة على ستيم دفعة واحدة.<br>
-                        • إمكانية تحديد إنجازات وتروفيات معينة وإلغاء قفل أخرى.<br>
-                        • آمن تماماً، بدون إدخال كلمة سر الحساب، وبحماية VAC كاملة.
-                    </div>
-                </div>
-                <a href="Install.Steam.Achievement.tiger.exe" id="modalTrophyDownloadBtn" class="btn-download btn-trophy" style="width: 100%; justify-content: center;" download onclick="handleTrophyDownload(event, this)">
-                    <img src="achievement_icon.png" style="width: 22px; height: 22px; border-radius: 50%; object-fit: contain; box-shadow: 0 0 10px rgba(0,0,0,0.4);" alt="Download">
-                    <span data-i18n="modal_trophy_btn">تحميل Steam Achievement tiger</span>
-                </a>
-            </div>
         </div>
     </div>
 
@@ -1450,7 +1247,7 @@
                 nav_download: "تنزيل",
                 telegram_contact: "للتواصل عبر تلجرام",
                 hero_badge: "آمن 100% وبدون حظر VAC • إصدار V1.0",
-                hero_title: "حزمة أدوات Steam الاحترافية <span>لزيادة الساعات وفتح الإنجازات</span>",
+                hero_title: "أداة ستيم الاحترافية <span>لزيادة الساعات بدون تحميل 24/7</span>",
                 btn_download_zip: "تحميل البرنامج مجاناً (ZIP)",
                 btn_how_to: "شرح طريقة التشغيل",
                 meta_size: "الحجم: 10 MB فقط (جاهز مسبقاً)",
@@ -1458,8 +1255,8 @@
                 meta_os: "يدعم Windows 10 & 11",
                 notice_title: "ملاحظة مهمة:",
                 notice_text: "يجب أن تكون اللعبة مشتراة وموجودة في مكتبة حسابك على Steam (أو لعبة مجانية مثل CS2) لتتمكن من زيادة ساعاتها.",
-                notice2_title: "ملاحظة إضافية:",
-                notice2_text: "لا تستطيع تشغيل الأداتين مع بعض في نفس الوقت.",
+                
+                
                 features_title: "أبرز المميزات",
                 features_subtitle: "تم تصميم الأداة لتوفر لك أعلى كفاءة وأمان كامل لحسابك",
                 feat1_title: "حتى 32 لعبة بالتوازي",
@@ -1507,21 +1304,21 @@
                 footer_copy: "جميع الحقوق محفوظة © steam hours tiger",
                 footer_team: "اسم الفريق المطور:",
                 footer_dev: "تمت البرمجة والتطوير بواسطة:",
-                nav_trophy: "ستيم أتشيفمنت 🏆",
+                
                 tool1_sub: "زيادة ساعات ألعاب ستيم 24/7 للحسابات المتعددة",
                 tool1_f1: "زيادة حتى 32 لعبة في نفس الوقت بالتوازي",
                 tool1_f2: "استهلاك 0% من المعالج وبدون تحميل الألعاب",
                 tool1_f3: "دعم وضع التخفي وحسابات متعددة وأمان VAC",
                 tool1_btn: "تحميل steam hours tiger",
-                tool2_sub: "فتح جميع إنجازات وتروفيات ألعاب Steam بضغطة زر",
-                tool2_f1: "فتح جميع الإنجازات (Unlock All Achievements)",
-                tool2_f2: "تحديد إنجازات معينة أو فتح الكل دفعة واحدة",
-                tool2_f3: "آمن 100%، خفيف جداً، وبدون إدخال كلمات السر",
-                tool2_btn: "تحميل Steam Achievement tiger",
-                modal_trophy_sub: "أداة فتح وترقية إنجازات ألعاب ستيم",
-                modal_trophy_desc: "أداة متطورة وخفيفة تمكنك من فتح كافة إنجازات وتروفيات ألعاب مكتبتك على ستيم (Steam Achievements) بنسبة 100% بضغطة زر واحدة وبأمان تام.",
-                modal_trophy_features_title: "✨ مميزات أداة الإنجازات:",
-                modal_trophy_btn: "تحميل Steam Achievement tiger"
+                
+                
+                
+                
+                
+                
+                
+                
+                
             },
             en: {
                 langButton: "العربية",
@@ -1532,7 +1329,7 @@
                 nav_download: "Download",
                 telegram_contact: "Contact via Telegram",
                 hero_badge: "100% Safe • No VAC Ban • Version V1.0",
-                hero_title: "Ultimate Steam Suite <span>Hours Boosting & Achievement Unlocker</span>",
+                hero_title: "Ultimate Steam Tool <span>Boost Hours Without Downloading 24/7</span>",
                 btn_download_zip: "Download Free",
                 btn_how_to: "Setup Guide",
                 meta_size: "Size: 99 MB",
@@ -1540,8 +1337,8 @@
                 meta_os: "Supports Windows 10 & 11",
                 notice_title: "Important Note:",
                 notice_text: "You must own/purchase the game in your Steam library (or have added a free-to-play game like CS2) to be able to boost its hours.",
-                notice2_title: "Additional Note:",
-                notice2_text: "You cannot run both tools together at the same time.",
+                
+                
                 features_title: "Key Features",
                 features_subtitle: "Designed to provide maximum efficiency and absolute security for your Steam accounts",
                 feat1_title: "Up to 32 Games Simultaneously",
@@ -1588,21 +1385,21 @@
                 footer_copy: "All Rights Reserved © steam hours tiger",
                 footer_team: "Developer Team:",
                 footer_dev: "Designed & Developed by:",
-                nav_trophy: "Steam Achievement 🏆",
+                
                 tool1_sub: "Continuous 24/7 Steam hours idler for multiple accounts",
                 tool1_f1: "Boost up to 32 games in parallel simultaneously",
                 tool1_f2: "0% CPU load without downloading games",
                 tool1_f3: "Invisible Mode, multi-account support & VAC safe",
                 tool1_btn: "Download steam hours tiger",
-                tool2_sub: "Unlock all Steam game achievements & trophies instantly",
-                tool2_f1: "Unlock 100% achievements for any Steam game",
-                tool2_f2: "Select specific achievements or unlock all at once",
-                tool2_f3: "100% Safe, ultra-lightweight, no password needed",
-                tool2_btn: "Download Steam Achievement tiger",
-                modal_trophy_sub: "Steam Achievements & Trophies Unlocker Tool",
-                modal_trophy_desc: "Powerful and lightweight utility to unlock 100% of your Steam game achievements safely with a single click.",
-                modal_trophy_features_title: "✨ Tool Features:",
-                modal_trophy_btn: "Download Steam Achievement tiger"
+                
+                
+                
+                 ultra-lightweight, no password needed",
+                
+                
+                
+                
+                
             }
         };
 
@@ -1636,37 +1433,7 @@
             applyLanguage(nextLang);
         }
 
-        // Steam Achievement tiger Modal Functions
-        function openTrophyModal() {
-            const modal = document.getElementById('trophyModal');
-            if (modal) {
-                modal.style.display = 'flex';
-                setTimeout(() => modal.classList.add('active'), 10);
-                document.body.style.overflow = 'hidden';
-            }
-        }
-
-        function closeTrophyModal() {
-            const modal = document.getElementById('trophyModal');
-            if (modal) {
-                modal.classList.remove('active');
-                setTimeout(() => {
-                    modal.style.display = 'none';
-                    document.body.style.overflow = 'auto';
-                }, 300);
-            }
-        }
-
-        function closeTrophyModalOnBackdrop(e) {
-            if (e.target.id === 'trophyModal') {
-                closeTrophyModal();
-            }
-        }
-
-        function handleTrophyDownload(event, btn) {
-            trackTrophyDownload();
-            console.log('Downloading Steam Achievement tiger...');
-        }
+        
 
         function trackHoursDownload() {
             try {
@@ -1675,11 +1442,7 @@
             } catch(e) {}
         }
 
-        function trackTrophyDownload() {
-            try {
-                let count = parseInt(localStorage.getItem('stat_trophy_dl') || '37', 10) + 1;
-                localStorage.setItem('stat_trophy_dl', count);
-            } catch(e) {}
+         catch(e) {}
         }
 
         // Apply any overrides from Admin Panel
@@ -1703,16 +1466,6 @@
             const tool1SubEl = document.querySelector('.program-card:first-child .program-header p');
             if (t1Sub && tool1SubEl) tool1SubEl.innerText = t1Sub;
 
-            const t2Link = localStorage.getItem('cfg_tool2_link');
-            if (t2Link) {
-                document.querySelectorAll('#trophyCardDownloadBtn, #modalTrophyDownloadBtn').forEach(a => a.href = t2Link);
-            }
-            const t2Meta = localStorage.getItem('cfg_tool2_meta');
-            const trophyMetaEl = document.getElementById('trophyMetaTxt');
-            if (t2Meta && trophyMetaEl) trophyMetaEl.innerText = t2Meta;
-
-            const t2Sub = localStorage.getItem('cfg_tool2_sub');
-            const tool2SubEl = document.querySelector('.program-card.trophy-booster .program-header p');
             if (t2Sub && tool2SubEl) tool2SubEl.innerText = t2Sub;
 
             // Notices
@@ -1720,15 +1473,7 @@
             const n1El = document.querySelector('[data-i18n="notice_text"]');
             if (n1 && n1El) n1El.innerText = n1;
 
-            const n2 = localStorage.getItem('cfg_notice2');
-            const n2El = document.querySelector('[data-i18n="notice2_text"]');
-            if (n2 && n2El) n2El.innerText = n2;
-
-            const showN2 = localStorage.getItem('cfg_show_notice2');
-            if (showN2 === 'false') {
-                const notice2Box = n2El ? n2El.closest('.notice-box') : null;
-                if (notice2Box) notice2Box.style.display = 'none';
-            }
+            
 
             // Telegram
             const tgLink = localStorage.getItem('cfg_tg_link');
@@ -1744,9 +1489,7 @@
             }
         }
 
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeTrophyModal();
-        });
+        
 
         // Initialize on load
         applyLanguage(currentLang);

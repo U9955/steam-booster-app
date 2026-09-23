@@ -788,15 +788,7 @@
                             </div>
                         </div>
 
-                        <div class="stat-card">
-                            <div class="stat-icon gold">
-                                <i class="fa-solid fa-trophy"></i>
-                            </div>
-                            <div class="stat-info">
-                                <h3 id="statTrophyDownloads">0</h3>
-                                <p>تحميلات Steam Achievement tiger</p>
-                            </div>
-                        </div>
+                        
                     </div>
 
                     <!-- Quick Control Box -->
@@ -827,7 +819,7 @@
                     <div class="panel-card">
                         <div class="panel-card-header">
                             <div class="panel-card-title">
-                                <i class="fa-solid fa-clock"></i> الأداة الأولى: steam hours tiger
+                                <i class="fa-solid fa-clock"></i> إعدادات برنامج: steam hours tiger
                             </div>
                             <span style="font-size: 0.85rem; color: #c084fc; font-weight: 700;">أداة زيادة الساعات</span>
                         </div>
@@ -850,41 +842,11 @@
                         </div>
 
                         <button class="btn-save" onclick="saveProgramsSettings()">
-                            <i class="fa-solid fa-floppy-disk"></i> حفظ إعدادات الأداة الأولى
+                            <i class="fa-solid fa-floppy-disk"></i> حفظ إعدادات البرنامج
                         </button>
                     </div>
 
-                    <!-- Tool 2: Steam Achievement tiger -->
-                    <div class="panel-card">
-                        <div class="panel-card-header">
-                            <div class="panel-card-title gold">
-                                <i class="fa-solid fa-trophy"></i> الأداة الثانية: Steam Achievement tiger
-                            </div>
-                            <span style="font-size: 0.85rem; color: #fbbf24; font-weight: 700;">أداة التروفيات والإنجازات</span>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label>رابط / اسم ملف التحميل (Download Link)</label>
-                                <input type="text" id="tool2Link" placeholder="Steam.Achievement.tiger.zip">
-                                <span class="form-help">اسم الملف المرفوع للأداة الثانية</span>
-                            </div>
-                            <div class="form-group">
-                                <label>نص الحجم والحالة أسفل الزر (Meta info)</label>
-                                <input type="text" id="tool2Meta" placeholder="حزمة كاملة (ZIP) • الحجم: 7.4 MB • جاهز للتشغيل الفوري">
-                            </div>
-                        </div>
-
-                        <div class="form-group" style="margin-bottom: 18px;">
-                            <label>الوصف المختصر للأداة الثانية</label>
-                            <input type="text" id="tool2Sub" placeholder="فتح جميع إنجازات وتروفيات ألعاب Steam بضغطة زر">
-                        </div>
-
-                        <button class="btn-save" onclick="saveProgramsSettings()">
-                            <i class="fa-solid fa-floppy-disk"></i> حفظ إعدادات الأداة الثانية
-                        </button>
                     </div>
-                </div>
 
                 <!-- TAB 3: NOTICES MANAGEMENT -->
                 <div id="tabNotices" class="tab-pane">
@@ -900,15 +862,7 @@
                             <textarea id="notice1Text" rows="3" placeholder="يجب أن تكون اللعبة مشتراة وموجودة في مكتبة حسابك على Steam (أو لعبة مجانية مثل CS2) لتتمكن من زيادة ساعاتها."></textarea>
                         </div>
 
-                        <div class="form-group" style="margin-bottom: 20px;">
-                            <label>الملاحظة الإضافية (تشغيل الأداتين):</label>
-                            <textarea id="notice2Text" rows="2" placeholder="لا تستطيع تشغيل الأداتين مع بعض في نفس الوقت."></textarea>
-                        </div>
-
-                        <div class="form-group" style="margin-bottom: 24px; display: flex; align-items: center; gap: 10px; flex-direction: row;">
-                            <input type="checkbox" id="showNotice2" style="width: 20px; height: 20px; accent-color: var(--primary); cursor: pointer;" checked>
-                            <label for="showNotice2" style="cursor: pointer; margin: 0;">إظهار الملاحظة الإضافية في الموقع</label>
-                        </div>
+                        
 
                         <button class="btn-save" onclick="saveNoticesSettings()">
                             <i class="fa-solid fa-floppy-disk"></i> حفظ التنبيهات
@@ -1057,17 +1011,10 @@
             document.getElementById('tool1Meta').value = localStorage.getItem('cfg_tool1_meta') || 'مثبت شامل (Install.exe) • الحجم: 99 MB • Windows 10 & 11';
             document.getElementById('tool1Sub').value = localStorage.getItem('cfg_tool1_sub') || 'زيادة ساعات ألعاب ستيم 24/7 للحسابات المتعددة';
 
-            // Tool 2
-            document.getElementById('tool2Link').value = localStorage.getItem('cfg_tool2_link') || 'Install.Steam.Achievement.tiger.exe';
-            document.getElementById('tool2Meta').value = localStorage.getItem('cfg_tool2_meta') || 'مثبت فوري (Install.exe) • الحجم: 1 MB • Windows 10 & 11';
-            document.getElementById('tool2Sub').value = localStorage.getItem('cfg_tool2_sub') || 'فتح جميع إنجازات وتروفيات ألعاب Steam بضغطة زر';
-
+            
             // Notices
             document.getElementById('notice1Text').value = localStorage.getItem('cfg_notice1') || 'يجب أن تكون اللعبة مشتراة وموجودة في مكتبة حسابك على Steam (أو لعبة مجانية مثل CS2) لتتمكن من زيادة ساعاتها.';
-            document.getElementById('notice2Text').value = localStorage.getItem('cfg_notice2') || 'لا تستطيع تشغيل الأداتين مع بعض في نفس الوقت.';
-            const showN2 = localStorage.getItem('cfg_show_notice2');
-            document.getElementById('showNotice2').checked = showN2 !== 'false';
-
+            
             // Telegram
             document.getElementById('telegramLink').value = localStorage.getItem('cfg_tg_link') || 'https://t.me/u9955';
             document.getElementById('telegramText').value = localStorage.getItem('cfg_tg_text') || 'للتواصل عبر تلجرام';
@@ -1081,18 +1028,13 @@
             localStorage.setItem('cfg_tool1_meta', document.getElementById('tool1Meta').value.trim());
             localStorage.setItem('cfg_tool1_sub', document.getElementById('tool1Sub').value.trim());
 
-            localStorage.setItem('cfg_tool2_link', document.getElementById('tool2Link').value.trim());
-            localStorage.setItem('cfg_tool2_meta', document.getElementById('tool2Meta').value.trim());
-            localStorage.setItem('cfg_tool2_sub', document.getElementById('tool2Sub').value.trim());
-
+            
             showToast('تم حفظ إعدادات البرامج بنجاح!');
         }
 
         function saveNoticesSettings() {
             localStorage.setItem('cfg_notice1', document.getElementById('notice1Text').value.trim());
-            localStorage.setItem('cfg_notice2', document.getElementById('notice2Text').value.trim());
-            localStorage.setItem('cfg_show_notice2', document.getElementById('showNotice2').checked ? 'true' : 'false');
-
+            
             showToast('تم حفظ التنبيهات بنجاح!');
         }
 
@@ -1127,19 +1069,16 @@
         function loadStats() {
             const visits = parseInt(localStorage.getItem('stat_visits') || '142', 10);
             const hours = parseInt(localStorage.getItem('stat_hours_dl') || '89', 10);
-            const trophy = parseInt(localStorage.getItem('stat_trophy_dl') || '37', 10);
-
+            
             document.getElementById('statVisits').innerText = visits.toLocaleString();
             document.getElementById('statHoursDownloads').innerText = hours.toLocaleString();
-            document.getElementById('statTrophyDownloads').innerText = trophy.toLocaleString();
-        }
+                    }
 
         function resetStats() {
             if (confirm('هل أنت متأكد من تصفير جميع إحصائيات التحميل والزيارات؟')) {
                 localStorage.setItem('stat_visits', '0');
                 localStorage.setItem('stat_hours_dl', '0');
-                localStorage.setItem('stat_trophy_dl', '0');
-                loadStats();
+                                loadStats();
                 showToast('تم تصفير العدادات بنجاح.');
             }
         }
