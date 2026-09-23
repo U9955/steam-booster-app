@@ -732,10 +732,24 @@
             .features-grid, .gallery-grid, .steps-container, .faq-container {
                 padding: 0 5% 30px;
             }
+        /* Announcement Banner */
+        .announcement-banner {
+            display: none;
+            background: linear-gradient(90deg, #7e22ce, #a855f7, #7e22ce);
+            color: #ffffff;
+            text-align: center;
+            padding: 10px 16px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(126, 34, 206, 0.35);
+            position: relative;
+            z-index: 999;
         }
     </style>
 </head>
 <body>
+    <!-- Global Announcement Banner -->
+    <div id="globalAnnouncement" class="announcement-banner"></div>
 
     <!-- Navbar -->
     <nav class="navbar">
@@ -1026,45 +1040,90 @@
             } catch(e) {}
         }
 
-        // Apply any dynamic overrides from Admin Panel
-        function applyAdminDynamicSettings() {
-            // Track visits
+        function applyConfig(cfg) {
+            if (!cfg) return;
+            // Tool 1 link
+            if (cfg.tool1_link) {
+                document.querySelectorAll('a[href*="Install.steam.hours.tiger.exe"]').forEach(a => a.href = cfg.tool1_link);
+            }
+            // Tool 1 meta
+            if (cfg.tool1_meta) {
+                const tool1MetaEl = document.querySelector('.program-card .program-meta');
+                if (tool1MetaEl) tool1MetaEl.innerText = cfg.tool1_meta;
+            }
+            // Tool 1 sub
+            if (cfg.tool1_sub) {
+                const tool1SubEl = document.querySelector('.program-card .program-header p');
+                if (tool1SubEl) tool1SubEl.innerText = cfg.tool1_sub;
+            }
+            // Notice
+            if (cfg.notice1) {
+                const n1El = document.querySelector('[data-i18n="notice_text"]');
+                if (n1El) n1El.innerText = cfg.notice1;
+            }
+            // Telegram Link & Text
+            if (cfg.telegram_link) {
+                const navTg = document.getElementById('navTelegramLink');
+                if (navTg) navTg.href = cfg.telegram_link;
+                const footTg = document.getElementById('footerTelegramLink');
+                if (footTg) footTg.href = cfg.telegram_link;
+            }
+            if (cfg.telegram_text) {
+                document.querySelectorAll('[data-i18n="telegram_contact"]').forEach(el => el.innerText = cfg.telegram_text);
+            }
+            // Announcement Banner
+            const banner = document.getElementById('globalAnnouncement');
+            if (banner) {
+                if (cfg.announcement_active && cfg.announcement) {
+                    banner.innerHTML = '<i class="fa-solid fa-bullhorn"></i> ' + cfg.announcement;
+                    banner.style.display = 'block';
+                } else {
+                    banner.style.display = 'none';
+                }
+            }
+        }
+
+        // Apply local storage overrides first
+        function applyLocalSettings() {
             try {
                 let v = parseInt(localStorage.getItem('stat_visits') || '142', 10) + 1;
                 localStorage.setItem('stat_visits', v);
             } catch(e) {}
 
-            // Tool settings
-            const t1Link = localStorage.getItem('cfg_tool1_link');
-            if (t1Link) {
-                document.querySelectorAll('a[href*="Install.steam.hours.tiger.exe"]').forEach(a => a.href = t1Link);
-            }
-            const t1Meta = localStorage.getItem('cfg_tool1_meta');
-            const tool1MetaEl = document.querySelector('.program-card .program-meta');
-            if (t1Meta && tool1MetaEl) tool1MetaEl.innerText = t1Meta;
-
-            const t1Sub = localStorage.getItem('cfg_tool1_sub');
-            const tool1SubEl = document.querySelector('.program-card .program-header p');
-            if (t1Sub && tool1SubEl) tool1SubEl.innerText = t1Sub;
-
-            // Notice
-            const n1 = localStorage.getItem('cfg_notice1');
-            const n1El = document.querySelector('[data-i18n="notice_text"]');
-            if (n1 && n1El) n1El.innerText = n1;
-
-            // Telegram Link & Text
-            const tgLink = localStorage.getItem('cfg_tg_link') || 'https://t.me/Tiger_TE';
-            const navTg = document.getElementById('navTelegramLink');
-            if (navTg) navTg.href = tgLink;
-            const footTg = document.getElementById('footerTelegramLink');
-            if (footTg) footTg.href = tgLink;
-
-            const tgText = localStorage.getItem('cfg_tg_text') || 'Telegram';
-            document.querySelectorAll('[data-i18n="telegram_contact"]').forEach(el => el.innerText = tgText);
+            const localCfg = {
+                tool1_link: localStorage.getItem('cfg_tool1_link'),
+                tool1_meta: localStorage.getItem('cfg_tool1_meta'),
+                tool1_sub: localStorage.getItem('cfg_tool1_sub'),
+                notice1: localStorage.getItem('cfg_notice1'),
+                telegram_link: localStorage.getItem('cfg_tg_link'),
+                telegram_text: localStorage.getItem('cfg_tg_text'),
+                announcement: localStorage.getItem('cfg_announcement'),
+                announcement_active: localStorage.getItem('cfg_announcement_active') === 'true'
+            };
+            applyConfig(localCfg);
         }
 
-        // Initialize on load
-        applyAdminDynamicSettings();
+        // Fetch live global configuration from cloud/GitHub (applies to all visitors)
+        async function fetchGlobalConfig() {
+            const endpoints = [
+                'https://raw.githubusercontent.com/U9955/steam-booster-app/main/config.json?t=' + Date.now(),
+                'config.json?t=' + Date.now()
+            ];
+            for (const url of endpoints) {
+                try {
+                    const res = await fetch(url, { cache: 'no-store' });
+                    if (res.ok) {
+                        const liveCfg = await res.json();
+                        applyConfig(liveCfg);
+                        return;
+                    }
+                } catch(err) {}
+            }
+        }
+
+        // Initialize
+        applyLocalSettings();
+        fetchGlobalConfig();
     </script>
 </body>
 </html>

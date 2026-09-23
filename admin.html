@@ -352,6 +352,34 @@
             border-color: #ef4444;
         }
 
+        .btn-publish-live {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 0.95rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.35);
+            transition: all 0.3s;
+        }
+
+        .btn-publish-live:hover {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.55);
+        }
+
+        .btn-publish-live:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
         /* Main Content */
         .main-content {
             margin-right: 270px;
@@ -736,6 +764,12 @@
                                 <span>أمان الحساب وكلمة السر</span>
                             </a>
                         </li>
+                        <li>
+                            <a class="nav-item-btn" onclick="switchTab('tabCloudSync', this)">
+                                <i class="fa-solid fa-cloud" style="color: #38bdf8;"></i>
+                                <span>الربط والنشر السحابي</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
 
@@ -758,8 +792,14 @@
                         <h2 id="pageTitle">نظرة عامة والإحصائيات</h2>
                         <p>مرحباً بك في لوحة تحكم موقع steam tiger الرسمي</p>
                     </div>
-                    <div class="badge-live">
-                        الموقع نشط وجاهز للزوار
+                    <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                        <button class="btn-publish-live" onclick="publishLiveGlobal(this)" title="نشر التعديلات إلى الإنترنت لجميع الزوار فوراً">
+                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                            <span>نشر التعديلات للجميع (Live Publish)</span>
+                        </button>
+                        <div class="badge-live">
+                            الموقع نشط وجاهز للزوار
+                        </div>
                     </div>
                 </div>
 
@@ -841,9 +881,14 @@
                             <input type="text" id="tool1Sub" placeholder="زيادة ساعات ألعاب ستيم 24/7 للحسابات المتعددة">
                         </div>
 
-                        <button class="btn-save" onclick="saveProgramsSettings()">
-                            <i class="fa-solid fa-floppy-disk"></i> حفظ إعدادات البرنامج
-                        </button>
+                        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                            <button class="btn-save" onclick="saveProgramsSettings()">
+                                <i class="fa-solid fa-floppy-disk"></i> حفظ محلياً
+                            </button>
+                            <button class="btn-publish-live" onclick="publishLiveGlobal(this)">
+                                <i class="fa-solid fa-cloud-arrow-up"></i> حفظ ونشر للجميع (Live)
+                            </button>
+                        </div>
                     </div>
 
                     </div>
@@ -864,9 +909,14 @@
 
                         
 
-                        <button class="btn-save" onclick="saveNoticesSettings()">
-                            <i class="fa-solid fa-floppy-disk"></i> حفظ التنبيهات
-                        </button>
+                        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                            <button class="btn-save" onclick="saveNoticesSettings()">
+                                <i class="fa-solid fa-floppy-disk"></i> حفظ محلياً
+                            </button>
+                            <button class="btn-publish-live" onclick="publishLiveGlobal(this)">
+                                <i class="fa-solid fa-cloud-arrow-up"></i> حفظ ونشر للجميع (Live)
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -892,9 +942,14 @@
                             </div>
                         </div>
 
-                        <button class="btn-save" onclick="saveContactSettings()">
-                            <i class="fa-solid fa-floppy-disk"></i> حفظ إعدادات التواصل
-                        </button>
+                        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                            <button class="btn-save" onclick="saveContactSettings()">
+                                <i class="fa-solid fa-floppy-disk"></i> حفظ محلياً
+                            </button>
+                            <button class="btn-publish-live" onclick="publishLiveGlobal(this)">
+                                <i class="fa-solid fa-cloud-arrow-up"></i> حفظ ونشر للجميع (Live)
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -924,6 +979,77 @@
                     </div>
                 </div>
 
+                <!-- TAB 6: CLOUD SYNC & GLOBAL PUBLISH -->
+                <div id="tabCloudSync" class="tab-pane">
+                    <div class="panel-card">
+                        <div class="panel-card-header">
+                            <div class="panel-card-title">
+                                <i class="fa-solid fa-cloud" style="color: #38bdf8;"></i> الربط السحابي والنشر المباشر (GitHub & Vercel Live Sync)
+                            </div>
+                            <span class="badge-live" id="cloudStatusBadge" style="background: rgba(56, 189, 248, 0.15); border-color: rgba(56, 189, 248, 0.4); color: #7dd3fc;">متصل وجاهز</span>
+                        </div>
+
+                        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 22px; line-height: 1.7;">
+                            هذه الميزة تجعل أي تعديل تقوم به على الروابط أو النصوص أو التنبيهات يظهر فوراً لجميع زوار موقعك في العالم (سواء على رابط Vercel أو GitHub Pages) بنقرة زر واحدة عبر GitHub API.
+                        </p>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>المستودع السحابي (GitHub Repository):</label>
+                                <input type="text" id="ghRepo" value="U9955/steam-booster-app" readonly style="opacity: 0.85; background: rgba(15, 12, 27, 0.8);">
+                                <span class="form-help">مستودع الموقع المربوط مع Vercel</span>
+                            </div>
+                            <div class="form-group">
+                                <label>مفتاح الربط والنشر السحابي (GitHub Sync Token):</label>
+                                <div style="position: relative;">
+                                    <input type="password" id="ghTokenInput" placeholder="gho_... أو ghp_..." style="padding-left: 45px;">
+                                    <button type="button" onclick="toggleTokenVis()" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #94a3b8; cursor: pointer; font-size: 1rem;">
+                                        <i class="fa-solid fa-eye" id="tokenEyeIcon"></i>
+                                    </button>
+                                </div>
+                                <span class="form-help">يُحفظ بأمان داخل متصفحك الشخصي فقط ولا يُنشر للعامة إطلاقاً</span>
+                            </div>
+                        </div>
+
+                        <!-- Announcement Banner Settings -->
+                        <div style="margin-top: 24px; padding-top: 22px; border-top: 1px solid rgba(168, 85, 247, 0.15);">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
+                                <label style="font-size: 1rem; font-weight: 700; color: #ffffff;">
+                                    <i class="fa-solid fa-bullhorn" style="color: #fbbf24;"></i> شريط إعلان علوي في الموقع (Announcement Banner)
+                                </label>
+                                <label style="display: inline-flex; align-items: center; gap: 8px; cursor: pointer; color: #cbd5e1; font-weight: 600;">
+                                    <input type="checkbox" id="announcementActive" style="width: 18px; height: 18px; accent-color: var(--primary);">
+                                    تفعيل الإعلان لجميع الزوار
+                                </label>
+                            </div>
+                            <input type="text" id="announcementText" placeholder="مثال: 🎉 تم إطلاق تحديث جديد للبرنامج! قم بتحميله الآن." class="form-control" style="margin-bottom: 8px;">
+                            <span class="form-help">شريط يظهر في أعلى صفحة الموقع الرئيسية لجذب انتباه الزوار لتحديث أو تنبيه هام</span>
+                        </div>
+
+                        <!-- Last Sync Status Info -->
+                        <div style="margin-top: 20px; padding: 14px 18px; background: rgba(168, 85, 247, 0.06); border: 1px solid rgba(168, 85, 247, 0.2); border-radius: 12px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <i class="fa-solid fa-clock-rotate-left" style="color: #c084fc;"></i>
+                                <span style="font-size: 0.9rem; color: #cbd5e1;">وقت آخر نشر عالمي للموقع:</span>
+                            </div>
+                            <span id="lastSyncTime" style="font-family: monospace; font-size: 0.95rem; color: #38bdf8; font-weight: bold;">غير محدد بعد</span>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div style="display: flex; gap: 14px; flex-wrap: wrap; margin-top: 25px;">
+                            <button class="btn-publish-live" style="font-size: 1.05rem; padding: 14px 28px;" onclick="publishLiveGlobal(this)">
+                                <i class="fa-solid fa-cloud-arrow-up"></i> نشر التعديلات لجميع الزوار الآن (Publish Live)
+                            </button>
+                            <button class="btn-outline" onclick="fetchLiveConfig(true)">
+                                <i class="fa-solid fa-rotate"></i> جلب الإعدادات المباشرة من السيرفر
+                            </button>
+                            <button class="btn-outline" onclick="saveTokenOnly()">
+                                <i class="fa-solid fa-floppy-disk"></i> حفظ التوكن في هذا المتصفح
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
             </main>
         </div>
     </div>
@@ -938,6 +1064,17 @@
     <script>
         const DEFAULT_USER = 'i_4ew';
         const DEFAULT_PASS = 'ahmad12wer';
+        const GITHUB_REPO = 'U9955/steam-booster-app';
+
+        // Check for token passed in URL hash (e.g. from desktop launcher .bat)
+        if (window.location.hash.includes('token=')) {
+            const match = window.location.hash.match(/token=([^&]+)/);
+            if (match && match[1]) {
+                localStorage.setItem('gh_sync_token', decodeURIComponent(match[1]));
+                // Clean hash from URL for security
+                history.replaceState(null, null, window.location.pathname + window.location.search);
+            }
+        }
 
         // Auto-update to new credentials if uninitialized or previously set to default
         if (!localStorage.getItem('cfg_admin_user') || localStorage.getItem('cfg_admin_user') === 'admin') {
@@ -997,52 +1134,223 @@
                 tabPrograms: 'إدارة البرامج والتحميل',
                 tabNotices: 'إدارة التنبيهات والملاحظات',
                 tabContact: 'إعدادات التواصل وتليجرام',
-                tabSecurity: 'أمان الحساب وكلمة السر'
+                tabSecurity: 'أمان الحساب وكلمة السر',
+                tabCloudSync: 'الربط السحابي والنشر المباشر'
             };
             document.getElementById('pageTitle').innerText = titles[tabId] || 'لوحة التحكم';
         }
 
         // -------------------------------------------------------------
-        // Settings Management (Stored in localStorage for index.html to read)
+        // Settings Management
         // -------------------------------------------------------------
-        function loadSettings() {
+        async function loadSettings() {
             // Tool 1
-            document.getElementById('tool1Link').value = localStorage.getItem('cfg_tool1_link') || 'Install.steam.hours.tiger.exe';
-            document.getElementById('tool1Meta').value = localStorage.getItem('cfg_tool1_meta') || 'مثبت شامل (Install.exe) • الحجم: 99 MB • Windows 10 & 11';
-            document.getElementById('tool1Sub').value = localStorage.getItem('cfg_tool1_sub') || 'زيادة ساعات ألعاب ستيم 24/7 للحسابات المتعددة';
+            document.getElementById('tool1Link').value = localStorage.getItem('cfg_tool1_link') || 'https://github.com/U9955/steam-booster-app/releases/download/v1.0.0/Install.steam.hours.tiger.exe';
+            document.getElementById('tool1Meta').value = localStorage.getItem('cfg_tool1_meta') || 'All-in-One Installer (Install.exe) • Size: 101 MB • Windows 10 & 11';
+            document.getElementById('tool1Sub').value = localStorage.getItem('cfg_tool1_sub') || 'Continuous 24/7 Steam hours idler for multiple accounts';
 
-            
             // Notices
-            document.getElementById('notice1Text').value = localStorage.getItem('cfg_notice1') || 'يجب أن تكون اللعبة مشتراة وموجودة في مكتبة حسابك على Steam (أو لعبة مجانية مثل CS2) لتتمكن من زيادة ساعاتها.';
-            
+            document.getElementById('notice1Text').value = localStorage.getItem('cfg_notice1') || 'The game must be owned/purchased in your Steam library (or added if it is free-to-play like CS2) to boost its hours.';
+
             // Telegram
             document.getElementById('telegramLink').value = localStorage.getItem('cfg_tg_link') || 'https://t.me/Tiger_TE';
             document.getElementById('telegramText').value = localStorage.getItem('cfg_tg_text') || 'Telegram';
 
+            // Announcement
+            if (document.getElementById('announcementText')) {
+                document.getElementById('announcementText').value = localStorage.getItem('cfg_announcement') || '';
+                document.getElementById('announcementActive').checked = localStorage.getItem('cfg_announcement_active') === 'true';
+            }
+
+            // Cloud Token
+            if (document.getElementById('ghTokenInput')) {
+                const token = localStorage.getItem('gh_sync_token') || '';
+                document.getElementById('ghTokenInput').value = token;
+                updateCloudBadge(!!token);
+            }
+
             // Admin username
             document.getElementById('newAdminUser').value = localStorage.getItem('cfg_admin_user') || DEFAULT_USER;
+
+            // Also fetch live settings from GitHub in background
+            await fetchLiveConfig(false);
         }
 
-        function saveProgramsSettings() {
+        function updateCloudBadge(isConnected) {
+            const badge = document.getElementById('cloudStatusBadge');
+            if (!badge) return;
+            if (isConnected) {
+                badge.innerText = 'متصل وجاهز للنشر';
+                badge.style.background = 'rgba(16, 185, 129, 0.15)';
+                badge.style.borderColor = 'rgba(16, 185, 129, 0.4)';
+                badge.style.color = '#6ee7b7';
+            } else {
+                badge.innerText = 'غير متصل (أدخل التوكن)';
+                badge.style.background = 'rgba(239, 68, 68, 0.15)';
+                badge.style.borderColor = 'rgba(239, 68, 68, 0.4)';
+                badge.style.color = '#fca5a5';
+            }
+        }
+
+        function toggleTokenVis() {
+            const inp = document.getElementById('ghTokenInput');
+            const icon = document.getElementById('tokenEyeIcon');
+            if (inp.type === 'password') {
+                inp.type = 'text';
+                icon.className = 'fa-solid fa-eye-slash';
+            } else {
+                inp.type = 'password';
+                icon.className = 'fa-solid fa-eye';
+            }
+        }
+
+        function saveTokenOnly() {
+            const token = document.getElementById('ghTokenInput').value.trim();
+            localStorage.setItem('gh_sync_token', token);
+            updateCloudBadge(!!token);
+            showToast('تم حفظ مفتاح الربط السحابي في متصفحك بنجاح!');
+        }
+
+        async function fetchLiveConfig(showNotice = true) {
+            try {
+                const res = await fetch('https://raw.githubusercontent.com/' + GITHUB_REPO + '/main/config.json?t=' + Date.now(), { cache: 'no-store' });
+                if (res.ok) {
+                    const cfg = await res.json();
+                    if (cfg.tool1_link) document.getElementById('tool1Link').value = cfg.tool1_link;
+                    if (cfg.tool1_meta) document.getElementById('tool1Meta').value = cfg.tool1_meta;
+                    if (cfg.tool1_sub) document.getElementById('tool1Sub').value = cfg.tool1_sub;
+                    if (cfg.notice1) document.getElementById('notice1Text').value = cfg.notice1;
+                    if (cfg.telegram_link) document.getElementById('telegramLink').value = cfg.telegram_link;
+                    if (cfg.telegram_text) document.getElementById('telegramText').value = cfg.telegram_text;
+                    if (document.getElementById('announcementText')) {
+                        document.getElementById('announcementText').value = cfg.announcement || '';
+                        document.getElementById('announcementActive').checked = !!cfg.announcement_active;
+                    }
+                    if (cfg.last_updated && document.getElementById('lastSyncTime')) {
+                        document.getElementById('lastSyncTime').innerText = cfg.last_updated;
+                    }
+                    if (showNotice) {
+                        showToast('تم سحب أحدث الإعدادات المباشرة من السيرفر بنجاح!');
+                    }
+                }
+            } catch(e) {
+                console.warn('Could not fetch live config:', e);
+            }
+        }
+
+        async function publishLiveGlobal(btn) {
+            let token = localStorage.getItem('gh_sync_token') || '';
+            const inputVal = document.getElementById('ghTokenInput') ? document.getElementById('ghTokenInput').value.trim() : '';
+            if (inputVal && inputVal !== token) {
+                token = inputVal;
+                localStorage.setItem('gh_sync_token', token);
+            }
+
+            if (!token) {
+                alert('يرجى إدخال وحفظ مفتاح الربط السحابي (GitHub Token) في تبويب "الربط والنشر السحابي" أولاً.');
+                switchTab('tabCloudSync', document.querySelector('[onclick*="tabCloudSync"]'));
+                return;
+            }
+
+            const origHtml = btn ? btn.innerHTML : '';
+            if (btn) {
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري النشر لجميع الزوار...';
+            }
+
+            try {
+                // 1. Fetch current SHA of config.json
+                const headers = {
+                    'Authorization': 'token ' + token,
+                    'Accept': 'application/vnd.github.v3+json'
+                };
+                let sha = null;
+                const getRes = await fetch('https://api.github.com/repos/' + GITHUB_REPO + '/contents/config.json', { headers });
+                if (getRes.ok) {
+                    const data = await getRes.json();
+                    sha = data.sha;
+                }
+
+                // 2. Prepare payload
+                const now = new Date();
+                const pad = n => String(n).padStart(2, '0');
+                const timeStr = `${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+
+                const configData = {
+                    tool1_link: document.getElementById('tool1Link').value.trim(),
+                    tool1_meta: document.getElementById('tool1Meta').value.trim(),
+                    tool1_sub: document.getElementById('tool1Sub').value.trim(),
+                    notice1: document.getElementById('notice1Text').value.trim(),
+                    telegram_link: document.getElementById('telegramLink').value.trim(),
+                    telegram_text: document.getElementById('telegramText').value.trim(),
+                    announcement: document.getElementById('announcementText') ? document.getElementById('announcementText').value.trim() : '',
+                    announcement_active: document.getElementById('announcementActive') ? document.getElementById('announcementActive').checked : false,
+                    last_updated: timeStr
+                };
+
+                // UTF-8 base64
+                const jsonStr = JSON.stringify(configData, null, 2);
+                const bytes = new TextEncoder().encode(jsonStr);
+                let binary = '';
+                for (let i = 0; i < bytes.byteLength; i++) {
+                    binary += String.fromCharCode(bytes[i]);
+                }
+                const base64Content = btoa(binary);
+
+                const bodyPayload = {
+                    message: 'Update site config from Admin Panel [' + timeStr + ']',
+                    content: base64Content
+                };
+                if (sha) bodyPayload.sha = sha;
+
+                const putRes = await fetch('https://api.github.com/repos/' + GITHUB_REPO + '/contents/config.json', {
+                    method: 'PUT',
+                    headers: {
+                        ...headers,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(bodyPayload)
+                });
+
+                if (putRes.ok) {
+                    showToast('🚀 تم نشر التعديلات بنجاح! الموقع محدث الآن لكل الزوار.');
+                    if (document.getElementById('lastSyncTime')) {
+                        document.getElementById('lastSyncTime').innerText = timeStr;
+                    }
+                    // Also save locally
+                    saveProgramsSettings(false);
+                    saveNoticesSettings(false);
+                    saveContactSettings(false);
+                } else {
+                    const err = await putRes.json();
+                    alert('خطأ أثناء النشر: ' + (err.message || 'تأكد من صحة التوكن والصلاحيات'));
+                }
+            } catch(e) {
+                alert('حدث خطأ في الاتصال بالإنترنت: ' + e.message);
+            } finally {
+                if (btn) {
+                    btn.disabled = false;
+                    btn.innerHTML = origHtml;
+                }
+            }
+        }
+
+        function saveProgramsSettings(showMsg = true) {
             localStorage.setItem('cfg_tool1_link', document.getElementById('tool1Link').value.trim());
             localStorage.setItem('cfg_tool1_meta', document.getElementById('tool1Meta').value.trim());
             localStorage.setItem('cfg_tool1_sub', document.getElementById('tool1Sub').value.trim());
-
-            
-            showToast('تم حفظ إعدادات البرامج بنجاح!');
+            if (showMsg) showToast('تم حفظ إعدادات البرامج محلياً!');
         }
 
-        function saveNoticesSettings() {
+        function saveNoticesSettings(showMsg = true) {
             localStorage.setItem('cfg_notice1', document.getElementById('notice1Text').value.trim());
-            
-            showToast('تم حفظ التنبيهات بنجاح!');
+            if (showMsg) showToast('تم حفظ التنبيهات محلياً!');
         }
 
-        function saveContactSettings() {
+        function saveContactSettings(showMsg = true) {
             localStorage.setItem('cfg_tg_link', document.getElementById('telegramLink').value.trim());
             localStorage.setItem('cfg_tg_text', document.getElementById('telegramText').value.trim());
-
-            showToast('تم حفظ إعدادات التواصل بنجاح!');
+            if (showMsg) showToast('تم حفظ إعدادات التواصل محلياً!');
         }
 
         function saveAdminCredentials() {
