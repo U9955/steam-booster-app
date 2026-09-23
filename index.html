@@ -1103,22 +1103,44 @@
             applyConfig(localCfg);
         }
 
-        // Fetch live global configuration from cloud/GitHub (applies to all visitors)
+        // Fetch live global configuration from cloud/GitHub (applies to all visitors immediately)
         async function fetchGlobalConfig() {
-            const endpoints = [
-                'https://raw.githubusercontent.com/U9955/steam-booster-app/main/config.json?t=' + Date.now(),
-                'config.json?t=' + Date.now()
-            ];
-            for (const url of endpoints) {
-                try {
-                    const res = await fetch(url, { cache: 'no-store' });
-                    if (res.ok) {
-                        const liveCfg = await res.json();
-                        applyConfig(liveCfg);
+            // Priority 1: GitHub API (instant real-time updates without cache delay)
+            try {
+                const apiRes = await fetch('https://api.github.com/repos/U9955/steam-booster-app/contents/config.json', {
+                    headers: { 'Accept': 'application/vnd.github.v3+json' },
+                    cache: 'no-store'
+                });
+                if (apiRes.ok) {
+                    const data = await apiRes.json();
+                    if (data && data.content) {
+                        const jsonStr = decodeURIComponent(escape(atob(data.content.replace(/\s/g, ''))));
+                        const cfg = JSON.parse(jsonStr);
+                        applyConfig(cfg);
                         return;
                     }
-                } catch(err) {}
-            }
+                }
+            } catch(e) {}
+
+            // Priority 2: Vercel / server relative file
+            try {
+                const res = await fetch('config.json?t=' + Date.now(), { cache: 'no-store' });
+                if (res.ok) {
+                    const cfg = await res.json();
+                    applyConfig(cfg);
+                    return;
+                }
+            } catch(e) {}
+
+            // Priority 3: GitHub Raw content
+            try {
+                const rawRes = await fetch('https://raw.githubusercontent.com/U9955/steam-booster-app/main/config.json?t=' + Date.now(), { cache: 'no-store' });
+                if (rawRes.ok) {
+                    const cfg = await rawRes.json();
+                    applyConfig(cfg);
+                    return;
+                }
+            } catch(err) {}
         }
 
         // Initialize
